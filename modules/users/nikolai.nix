@@ -66,6 +66,7 @@ in {
       whois
       youtube-dl
       tealdeer
+      gnumake
     ];
 
     home.file.".config/nvim".source = ./dotfiles/nvim;
