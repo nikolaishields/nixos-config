@@ -24,7 +24,10 @@ in {
     kernelParams = [ "mem_sleep_default=deep" "nohibernate" ];
 
     extraModulePackages = [ pkgs.linuxPackages_latest.v4l2loopback ];
-    extraModprobeConfig = ''options v4l2loopback exclusive_caps=1 video_nr=9 card_label="OBS"'';
+    extraModprobeConfig = ''
+      options v4l2loopback exclusive_caps=1 video_nr=9 card_label="OBS"\n
+      options snd-hda-intel model=dell-headset-multi
+      '';
 
     loader = {
       systemd-boot.enable = true;
