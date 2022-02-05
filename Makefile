@@ -38,6 +38,12 @@ install-uefi:
 	make $(HOST)
 	nixos-install
 
+.PHONY: usb
+usb:
+	$(call check_defined, DEVICE, ex. /dev/sda)
+	curl 'https://channels.nixos.org/nixos-21.11/latest-nixos-gnome-x86_64-linux.iso' | dd conv=noerror,sync bs=4M of=$(DEVICE) status=progress
+
+
 clean:
 	rm -rf result
 	unlink /etc/nixos/configuration.nix
