@@ -6,7 +6,6 @@ in {
 
   imports = 
   [
-    ../../modules/graphical.nix
     ../../modules/hypervisor.nix
     ../../modules/networking.nix
     ../../modules/system-packages.nix
@@ -17,17 +16,9 @@ in {
   boot = {
     # TODO: ephemeral root
     #  boot.initrd.postDeviceCommands = "zfs rollback -r rpool/local/root@blank";
-
-    supportedFilesystems = [ "ext4" ];
+    supportedFilesystems = [ "ext4" "zfs" ];
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelModules = [ "kvm-intel" "v4l2loopback" ];
-    kernelParams = [ "mem_sleep_default=deep" "nohibernate" ];
-
-    extraModulePackages = [ pkgs.linuxPackages_latest.v4l2loopback ];
-    extraModprobeConfig = ''
-      options v4l2loopback exclusive_caps=1 video_nr=9 card_label="OBS"\n
-      options snd-hda-intel model=dell-headset-multi
-      '';
+    kernelModules = [ "kvm-intel" ];
 
     loader = {
       systemd-boot.enable = true;
@@ -35,7 +26,7 @@ in {
     };
 
     initrd = {
-      supportedFilesystems = [ "ext4" ];
+      supportedFilesystems = [ "ext4" "zfs" ];
       availableKernelModules = [ "xhci_pci" "nvme" ];
     };
   };
@@ -54,23 +45,17 @@ in {
   };
 
   hardware = {
-    bluetooth.enable = true;
-    pulseaudio.enable = false;
     cpu.intel.updateMicrocode = true;
     enableAllFirmware = true;
-    logitech.wireless.enable = true;
-    logitech.wireless.enableGraphical = true;
-    video.hidpi.enable = lib.mkDefault true;
   };
 
   networking = {
-    hostName = "theseus";
-    hostId = "e7d11eb2";
+    hostName = "nas";
+    hostId = "";
   };
 
   powerManagement = {
     powertop.enable = true;
-    cpuFreqGovernor = lib.mkDefault "powersave";
   };
 
   system.stateVersion = "21.11";
