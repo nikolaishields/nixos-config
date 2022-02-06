@@ -5,6 +5,11 @@ all: build
 theseus:
 	ln -sf $(realpath hosts/$@/configuration.nix) /etc/nixos
 
+.PHONY: nas
+theseus:
+	ln -sf $(realpath hosts/$@/configuration.nix) /etc/nixos
+
+
 .PHONY: switch
 switch: 
 	nixos-rebuild $@
@@ -17,26 +22,21 @@ build:
 test:
 	nixos-rebuild $@
 
-.PHONY: install-uefi check_user_confirmation
+.PHONY: install-uefi 
 install-uefi:
 	$(call check_defined, DEVICE, ex. /dev/sda)
-	$(call check_defined, HOST, target host config (see hosts/))
-	parted --script $(DEVICE) \
+	wipefs -a $(DEVICE)
+	parted --script -a optimal -- $(DEVICE) \
 		mklabel gpt	\
-		mkpart primary 512MiB -8GiB	\
-		mkpart primary linux-swap -8GiB 100% \
-		mkpart ESP fat32 1MiB 512MiB \
-		set 3 esp on \
-	mkfs.ext4 -L nixos "$(DEVICE)1"
-	mkswap -L swap "$(DEVICE)2"
-	mkfs.fat -F 32 -n boot "$(DEVICE)3"
-	mount /dev/disk/by-label/nixos /mnt
+		mkpart primary 512Mib 100% \
+		mkpart ESP fat32 1M 512M \
+		set 3 esp on 
 	mkdir -p /mnt/boot
-	mount /dev/disk/by-label/boot /mnt/boot
-	swapon "$(DEVICE)2"
+	mkfs.ext4 "$(DEVICE)1"
+	mkfs.vfat "$(DEVICE)2"
+	mount "$(DEVICE)1" /mnt
+	mount "$(DEVICE)2" /mnt/boot
 	nixos-generate-config --root /mnt
-	make $(HOST)
-	nixos-install
 
 .PHONY: usb
 usb:

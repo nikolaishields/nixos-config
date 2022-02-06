@@ -1,5 +1,6 @@
 { config, pkgs, ... }: {
   environment.systemPackages = with pkgs.unstable; [
+    gparted
     discord
     fprintd
     firefox

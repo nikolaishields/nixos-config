@@ -2,6 +2,7 @@
   environment.binsh = "${pkgs.dash}/bin/dash";
 
   environment.systemPackages = with pkgs; [
+    parted
     bash
     nixfmt
     curl
