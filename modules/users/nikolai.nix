@@ -3,7 +3,6 @@ let
   home-manager = builtins.fetchTarball
     "https://github.com/nix-community/home-manager/archive/master.tar.gz";
 in {
-
   security = {
     sudo.wheelNeedsPassword = false;
     pam.services.login.fprintAuth = true;
@@ -32,42 +31,29 @@ in {
     home.stateVersion = "21.11";
 
     home.packages = with pkgs.unstable; [
-      shellcheck
       direnv
-      discord
       ffmpeg
       file
       fira-code-symbols
-      firecracker
-      firectl
-      firefox
       font-awesome
-      google-chrome
-      htop
-      ignite
-      inkscape
+      gnumake
       gnupg
+      htop
       jq
-      libreoffice
       lorri
-      mpv
       neovim
       nerdfonts
       niv
-      obs-studio
       pass
       ranger
       ripgrep
-      slack
+      shellcheck
       sops
-      spotify
-      tilix
+      tealdeer
       tmux
       vagrant
       whois
       youtube-dl
-      tealdeer
-      gnumake
     ];
 
     home.file.".config/nvim".source = ./dotfiles/nvim;
@@ -146,6 +132,5 @@ in {
       };
     };
   };
-
 }
 

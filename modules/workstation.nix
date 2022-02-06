@@ -1,22 +1,32 @@
 { config, pkgs, ... }: {
-  environment.systemPackages = with pkgs; [
-    libfprint
+  environment.systemPackages = with pkgs.unstable; [
+    discord
     fprintd
-    xdg-desktop-portal
-    xdg-desktop-portal-gnome
-    xdg-desktop-portal-gtk
-    pavucontrol
+    firefox
     gnome.gnome-shell
     gnome.gnome-tweaks
     gnome.pomodoro
     gnomeExtensions.appindicator
     gnomeExtensions.gtile
+    gnomeExtensions.sound-output-device-chooser
     gnomeExtensions.spotify-tray
     gnomeExtensions.vitals
-    gnomeExtensions.sound-output-device-chooser
+    google-chrome
     gsettings-desktop-schemas
     gtk-engine-murrine
     gtk_engines
+    inkscape
+    libfprint
+    libreoffice
+    mpv
+    obs-studio
+    pavucontrol
+    slack
+    spotify
+    tilix
+    xdg-desktop-portal
+    xdg-desktop-portal-gnome
+    xdg-desktop-portal-gtk
   ];
 
   services = {

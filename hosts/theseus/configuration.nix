@@ -2,15 +2,18 @@
 let
   unstableTarball = fetchTarball
     "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+  tailscale-authkey = "tskey-kTmq5T6CNTRL-XHyQtQDrYCQTcEfX5zgVN";
 in {
-
   imports = 
   [
-    ../../modules/graphical.nix
-    ../../modules/hypervisor.nix
-    ../../modules/networking.nix
-    ../../modules/system-packages.nix
+    ../../modules/base-packages.nix
+    ../../modules/monitoring/default.nix
+    ../../modules/networking/default.nix
+    ../../modules/services/firecracker.nix
+    ../../modules/services/libvirt.nix
+    ../../modules/services/podman.nix
     ../../modules/users/nikolai.nix
+    ../../modules/workstation.nix
     ./hardware-configuration.nix
   ];
 
