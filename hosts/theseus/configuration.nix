@@ -2,7 +2,6 @@
 let
   unstableTarball = fetchTarball
     "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-  tailscale-authkey = "tskey-kTmq5T6CNTRL-XHyQtQDrYCQTcEfX5zgVN";
 in {
   imports = 
   [

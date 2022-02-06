@@ -6,9 +6,12 @@ in {
 
   imports = 
   [
-    ../../modules/hypervisor.nix
-    ../../modules/networking.nix
-    ../../modules/system-packages.nix
+    ../../modules/base-packages.nix
+    ../../modules/monitoring/default.nix
+    ../../modules/networking/default.nix
+    ../../modules/services/firecracker.nix
+    ../../modules/services/libvirt.nix
+    ../../modules/services/podman.nix
     ../../modules/users/nikolai.nix
     ./hardware-configuration.nix
   ];
