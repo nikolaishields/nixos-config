@@ -11,6 +11,7 @@ in {
     ../../modules/services/firecracker.nix
     ../../modules/services/libvirt.nix
     ../../modules/services/podman.nix
+    ../../modules/services/k3s.nix
     ../../modules/users/nikolai.nix
     ../../modules/workstation.nix
     ./hardware-configuration.nix

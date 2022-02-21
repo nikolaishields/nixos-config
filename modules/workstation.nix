@@ -1,9 +1,9 @@
 { config, pkgs, ... }: {
   environment.systemPackages = with pkgs.unstable; [
-    gparted
+    chromium
     discord
-    fprintd
     firefox
+    fprintd
     gnome.gnome-shell
     gnome.gnome-tweaks
     gnome.pomodoro
@@ -13,6 +13,7 @@
     gnomeExtensions.spotify-tray
     gnomeExtensions.vitals
     google-chrome
+    gparted
     gsettings-desktop-schemas
     gtk-engine-murrine
     gtk_engines

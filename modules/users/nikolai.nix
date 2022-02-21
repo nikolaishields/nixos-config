@@ -31,7 +31,8 @@ in {
     home.stateVersion = "21.11";
 
     home.packages = with pkgs.unstable; [
-      direnv
+      k9s
+      kubectl
       ffmpeg
       file
       fira-code-symbols
@@ -59,6 +60,12 @@ in {
     home.file.".config/nvim".source = ./dotfiles/nvim;
     programs = {
       home-manager.enable = true;
+
+      direnv = {
+        enable = true;
+        enableBashIntegration = true;
+        enableZshIntegration = true;
+      };
 
       fzf = {
         enable = true;
@@ -92,19 +99,19 @@ in {
 
       };
 
-      vscode = {
-        enable = true;
-        extensions = with pkgs.vscode-extensions; [
-          golang.go
-          hashicorp.terraform
-          ms-azuretools.vscode-docker
-          ms-kubernetes-tools.vscode-kubernetes-tools
-          ms-vscode-remote.remote-ssh
-          ms-vsliveshare.vsliveshare
-          vscodevim.vim
-          yzhang.markdown-all-in-one
-        ];
-      };
+      #vscode = {
+        #enable = true;
+        #extensions = with pkgs.vscode-extensions; [
+          #golang.go
+          #hashicorp.terraform
+          #ms-azuretools.vscode-docker
+          #ms-kubernetes-tools.vscode-kubernetes-tools
+          #ms-vscode-remote.remote-ssh
+          #ms-vsliveshare.vsliveshare
+          #vscodevim.vim
+          #yzhang.markdown-all-in-one
+        #];
+      #};
 
       git = {
         enable = true;

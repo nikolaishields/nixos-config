@@ -6,7 +6,7 @@ theseus:
 	ln -sf $(realpath hosts/$@/configuration.nix) /etc/nixos
 
 .PHONY: nas
-theseus:
+nas:
 	ln -sf $(realpath hosts/$@/configuration.nix) /etc/nixos
 
 
