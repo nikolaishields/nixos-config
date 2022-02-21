@@ -99,19 +99,19 @@ in {
 
       };
 
-      #vscode = {
-        #enable = true;
-        #extensions = with pkgs.vscode-extensions; [
-          #golang.go
-          #hashicorp.terraform
-          #ms-azuretools.vscode-docker
-          #ms-kubernetes-tools.vscode-kubernetes-tools
-          #ms-vscode-remote.remote-ssh
-          #ms-vsliveshare.vsliveshare
-          #vscodevim.vim
-          #yzhang.markdown-all-in-one
-        #];
-      #};
+      vscode = {
+        enable = true;
+        extensions = with pkgs.vscode-extensions; [
+          golang.go
+          hashicorp.terraform
+          ms-azuretools.vscode-docker
+          ms-kubernetes-tools.vscode-kubernetes-tools
+          ms-vscode-remote.remote-ssh
+          ms-vsliveshare.vsliveshare
+          vscodevim.vim
+          yzhang.markdown-all-in-one
+        ];
+      };
 
       git = {
         enable = true;

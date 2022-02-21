@@ -54,7 +54,7 @@ in {
 
   networking = {
     hostName = "nas";
-    hostId = "";
+    hostId = "007f0200";
   };
 
   powerManagement = {
