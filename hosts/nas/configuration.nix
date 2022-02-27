@@ -10,6 +10,7 @@ in {
     ../../modules/monitoring/default.nix
     ../../modules/networking/default.nix
     ../../modules/services/firecracker.nix
+    ../../modules/services/k3s.nix
     ../../modules/services/libvirt.nix
     ../../modules/services/podman.nix
     ../../modules/users/nikolai.nix

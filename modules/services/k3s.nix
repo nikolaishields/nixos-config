@@ -8,10 +8,4 @@
       role = "server";
     };
   };
-  # zfs support
-#    virtualisation.containerd.enable = true;
-  ## TODO describe how to enable zfs snapshotter in containerd
-  #services.k3s.extraFlags = toString [
-    #"--container-runtime-endpoint unix:///run/containerd/containerd.sock"
-  #];
 }
