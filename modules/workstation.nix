@@ -72,6 +72,5 @@
       enableSSHSupport = true;
     };
   };
-
 }
 

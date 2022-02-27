@@ -11,7 +11,7 @@ in {
     ../../modules/services/firecracker.nix
     ../../modules/services/libvirt.nix
     ../../modules/services/podman.nix
-    ../../modules/services/k3s.nix
+    ../../modules/services/vault.nix
     ../../modules/users/nikolai.nix
     ../../modules/workstation.nix
     ./hardware-configuration.nix
@@ -43,6 +43,13 @@ in {
     };
   };
 
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
+
   nixpkgs.config = {
     allowUnfree = true;
     autoOptimiseStore = true;
@@ -52,7 +59,7 @@ in {
   };
 
   time = {
-    timeZone = "America/Chicago";
+    timeZone = "US/Central";
     hardwareClockInLocalTime = true;
   };
 

@@ -5,7 +5,7 @@
   ];
 
   users.users.vault = {
-    isNormalUser = true;
+    isNormalUser = false;
     shell = pkgs.zsh;
     extraGroups = [ "vault" ];
   };

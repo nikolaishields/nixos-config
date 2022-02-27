@@ -1,30 +1,18 @@
+SHELL=/bin/sh
+
 .PHONY: all
 all: build
 
-.PHONY: theseus
-theseus:
+.PHONY: theseus nas
+theseus nas:
 	ln -sf $(realpath hosts/$@/configuration.nix) /etc/nixos
 
-.PHONY: nas
-nas:
-	ln -sf $(realpath hosts/$@/configuration.nix) /etc/nixos
-
-
-.PHONY: switch
-switch: 
+.PHONY: switch build test
+switch build test: 
 	nixos-rebuild $@
 
-.PHONY: build
-build:
-	nixos-rebuild $@
-
-.PHONY: test
-test:
-	nixos-rebuild $@
-
-.PHONY: install-uefi 
-install-uefi:
-	$(call check_defined, DEVICE, ex. /dev/sda)
+.PHONY: nixos-install
+install:
 	wipefs -a $(DEVICE)
 	parted --script -a optimal -- $(DEVICE) \
 		mklabel gpt	\
@@ -43,10 +31,12 @@ usb:
 	$(call check_defined, DEVICE, ex. /dev/sda)
 	curl 'https://channels.nixos.org/nixos-21.11/latest-nixos-gnome-x86_64-linux.iso' | dd conv=noerror,sync bs=4M of=$(DEVICE) status=progress
 
-
+.PHONY: clean
 clean:
 	rm -rf result
 	unlink /etc/nixos/configuration.nix
+
+check_device := $(if $(DEVICE),then!,else!)
 
 check_defined = \
     $(strip $(foreach 1,$1, \
