@@ -2,6 +2,7 @@
 let
   home-manager = builtins.fetchTarball
     "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+
 in {
   security = {
     sudo.wheelNeedsPassword = false;
@@ -31,16 +32,15 @@ in {
     home.stateVersion = "21.11";
 
     home.packages = with pkgs.unstable; [
-      k9s
-      kubectl
       ffmpeg
       file
       fira-code-symbols
       font-awesome
       gnumake
-      gnupg
       htop
       jq
+      k9s
+      kubectl
       lorri
       neovim
       nerdfonts
@@ -55,11 +55,27 @@ in {
       vagrant
       whois
       youtube-dl
+      pinentry
+      keybase
+      kbfs
     ];
 
     home.file.".config/nvim".source = ./dotfiles/nvim;
+
+    services = with pkgs.unstable; {
+      kbfs.enable = false;
+      keybase.enable = false;
+      gpg-agent = {
+        enable = true;
+        pinentryFlavor = "gnome3";
+      };
+    };
+
     programs = {
+
       home-manager.enable = true;
+
+      gpg.enable = true;
 
       direnv = {
         enable = true;

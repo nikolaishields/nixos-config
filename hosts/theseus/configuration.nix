@@ -11,10 +11,11 @@ in {
     ../../modules/services/firecracker.nix
     ../../modules/services/libvirt.nix
     ../../modules/services/podman.nix
-    ../../modules/services/vault.nix
+    ../../modules/services/minio.nix
     ../../modules/users/nikolai.nix
     ../../modules/workstation.nix
     ./hardware-configuration.nix
+
   ];
 
   boot = {
@@ -83,7 +84,11 @@ in {
     cpuFreqGovernor = lib.mkDefault "powersave";
   };
 
-  system.stateVersion = "21.11";
+  services = {
+    pcscd.enable = true;
+  };
+
+  system.stateVersion = "22.05";
 
 }
 

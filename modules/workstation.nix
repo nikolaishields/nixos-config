@@ -6,6 +6,7 @@
     fprintd
     gnome.gnome-shell
     gnome.gnome-tweaks
+    pinentry-gnome
     gnome.pomodoro
     gnomeExtensions.appindicator
     gnomeExtensions.gtile
@@ -40,6 +41,7 @@
       desktopManager.gnome.enable = true;
     };
 
+
     dbus.packages = [ pkgs.gnome.dconf ];
 
     udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
@@ -62,14 +64,6 @@
       pulse.enable = true;
       jack.enable = true;
       socketActivation = true;
-    };
-  };
-
-  programs = {
-    mtr.enable = true;
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
     };
   };
 }
