@@ -9,6 +9,7 @@
     pinentry-gnome
     gnome.pomodoro
     gnomeExtensions.appindicator
+    keybase-gui
     gnomeExtensions.gtile
     gnomeExtensions.sound-output-device-chooser
     gnomeExtensions.spotify-tray
@@ -30,6 +31,8 @@
     xdg-desktop-portal
     xdg-desktop-portal-gnome
     xdg-desktop-portal-gtk
+    paperkey
+    pinentry-qt
   ];
 
   services = {
@@ -44,7 +47,7 @@
 
     dbus.packages = [ pkgs.gnome.dconf ];
 
-    udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
+    udev.packages = [ pkgs.gnome.gnome-settings-daemon pkgs.unstable.yubikey-personalization ];
 
     # Swap Caps Lock to CTRL/ESC
     interception-tools.enable = true;

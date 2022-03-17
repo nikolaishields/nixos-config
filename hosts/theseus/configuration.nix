@@ -10,9 +10,9 @@ in {
     ../../modules/networking/default.nix
     ../../modules/services/firecracker.nix
     ../../modules/services/libvirt.nix
-    ../../modules/services/podman.nix
-    ../../modules/services/minio.nix
-    ../../modules/users/nikolai.nix
+    ../../modules/services/docker.nix
+    ../../modules/services/yubikey.nix
+    ../../modules/users/nikolai/user.nix
     ../../modules/workstation.nix
     ./hardware-configuration.nix
 
@@ -82,10 +82,6 @@ in {
   powerManagement = {
     powertop.enable = true;
     cpuFreqGovernor = lib.mkDefault "powersave";
-  };
-
-  services = {
-    pcscd.enable = true;
   };
 
   system.stateVersion = "22.05";
