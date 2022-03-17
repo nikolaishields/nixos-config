@@ -12,7 +12,7 @@ in {
     ../../modules/services/libvirt.nix
     ../../modules/services/docker.nix
     ../../modules/services/yubikey.nix
-    ../../modules/users/nikolai/user.nix
+    ../../modules/users/nikolai
     ../../modules/workstation.nix
     ./hardware-configuration.nix
 
