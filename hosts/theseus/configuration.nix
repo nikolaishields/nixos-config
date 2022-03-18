@@ -2,9 +2,14 @@
 let
   unstableTarball = fetchTarball
     "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+  impermanence = builtins.fetchGit {
+    url = "https://github.com/nix-community/impermanence.git";
+    ref = "master";
+  };
 in {
   imports = 
   [
+    (import "${impermanence}/nixos.nix")
     ../../modules/base-packages.nix
     ../../modules/monitoring/default.nix
     ../../modules/networking/default.nix
@@ -31,7 +36,7 @@ in {
     extraModprobeConfig = ''
       options v4l2loopback exclusive_caps=1 video_nr=9 card_label="OBS"\n
       options snd-hda-intel model=dell-headset-multi
-      '';
+    '';
 
     loader = {
       systemd-boot.enable = true;

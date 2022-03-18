@@ -1,7 +1,10 @@
 { config, pkgs, ... }:
 let
-  home-manager = builtins.fetchTarball
-    "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+  impermanence = builtins.fetchGit {
+    url = "https://github.com/nix-community/impermanence.git";
+    ref = "master";
+  };
 in {
   security = {
     sudo.wheelNeedsPassword = false;
@@ -11,7 +14,7 @@ in {
 
   users.users.nikolai = {
     isNormalUser = true;
-    shell = pkgs.zsh;
+    shell = pkgs.unstable.zsh;
     extraGroups = [ "docker" "wheel" "networkmanager" "input" "libvirtd" ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMrs3AFRgL4YfA7aMAD7X3O9kihcSCJKY8GiyWYV6Jwx nikolai@nikolaishields.com"
@@ -21,12 +24,10 @@ in {
 
   imports = [
     (import "${home-manager}/nixos")
+    #(import "${impermanence}/home-manager.nix")
   ];
 
   home-manager.useGlobalPkgs = true;
-
-   
-    
 
   home-manager.users.nikolai = {
 
@@ -43,6 +44,7 @@ in {
     home.stateVersion = "21.11";
 
     home.packages = with pkgs.unstable; [
+      nixos-generators
       ffmpeg
       file
       fira-code-symbols
@@ -71,12 +73,13 @@ in {
     ];
 
     services = {
+    # TODO: Get latest keybase working
       kbfs = {
-        enable = false;
+        enable = true;
       };
 
       keybase = {
-        enable = false;
+        enable = true;
       };
 
       gpg-agent = {
@@ -90,7 +93,6 @@ in {
     };
 
     programs = {
-
       home-manager.enable = true;
 
       bat.enable = true;
@@ -150,7 +152,7 @@ in {
       vscode = {
         enable = true;
         package = pkgs.unstable.vscode;
-        extensions = with pkgs.unstable.vscode-extensions; [
+        extensions = with pkgs.vscode-extensions; [
           golang.go
           hashicorp.terraform
           ms-azuretools.vscode-docker
@@ -168,7 +170,7 @@ in {
         vimAlias = true;
         viAlias = true;
         withPython3 = true;
-        extraPackages = with pkgs.unstable; [
+        extraPackages = with pkgs; [
           ripgrep
           shfmt
           git
@@ -197,6 +199,7 @@ in {
 
       git = {
         enable = true;
+        package = pkgs.unstable.gitFull;
         aliases = {
           co = "checkout";
           c = "commit";
