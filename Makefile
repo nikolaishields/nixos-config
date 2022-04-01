@@ -5,14 +5,14 @@ all: build
 
 .PHONY: theseus nas
 theseus nas:
-	ln -sf $(realpath hosts/$@/configuration.nix) /etc/nixos
+	sudo ln -sf $(realpath hosts/$@/configuration.nix) /etc/nixos
 
 .PHONY: switch build test
 switch build test: 
-	nixos-rebuild $@
+	sudo nixos-rebuild $@
 
-.PHONY: nixos-install
-install:
+.PHONY: bootstrap
+bootstrap:
 	wipefs -a $(DEVICE)
 	parted --script -a optimal -- $(DEVICE) \
 		mklabel gpt	\
@@ -31,13 +31,17 @@ usb:
 	$(call check_defined, DEVICE, ex. /dev/sda)
 	curl 'https://channels.nixos.org/nixos-21.11/latest-nixos-gnome-x86_64-linux.iso' | dd conv=noerror,sync bs=4M of=$(DEVICE) status=progress
 
+.PHONY:vm
+vm:
+	nixos-generate --run -c $(realpath hosts/$(HOST)/configuration.nix) 
+
 image:
-	nixos-generate --run -c $(realpath hosts/$@/configuration.nix) 
 
 .PHONY: clean
 clean:
 	rm -rf result
-	unlink /etc/nixos/configuration.nix
+	rm -rf *.qcow2
+	sudo unlink /etc/nixos/configuration.nix
 
 check_device := $(if $(DEVICE),then!,else!)
 

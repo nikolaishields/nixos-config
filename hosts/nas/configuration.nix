@@ -13,8 +13,7 @@ in {
     ../../modules/services/k3s.nix
     ../../modules/services/libvirt.nix
     ../../modules/services/podman.nix
-    ../../modules/users/nikolai.nix
-    ./hardware-configuration.nix
+    ../../modules/users/nikolai/default.nix
   ];
 
   boot = {

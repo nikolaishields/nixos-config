@@ -9,7 +9,6 @@ let
 in {
   security = {
     sudo.wheelNeedsPassword = false;
-    pam.services.login.fprintAuth = true;
     rtkit.enable = true;
   };
 
