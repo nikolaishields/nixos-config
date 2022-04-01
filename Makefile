@@ -32,7 +32,7 @@ usb:
 	curl 'https://channels.nixos.org/nixos-21.11/latest-nixos-gnome-x86_64-linux.iso' | dd conv=noerror,sync bs=4M of=$(DEVICE) status=progress
 
 image:
-	nixos-generate -c $(realpath hosts/$@/configuration.nix) 
+	nixos-generate --run -c $(realpath hosts/$@/configuration.nix) 
 
 .PHONY: clean
 clean:

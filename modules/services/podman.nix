@@ -2,7 +2,7 @@
   virtualisation = {
     podman  = {
       enable = false;
-      dockerCompat = false;
+      dockerCompat = true;
     };
   };
 }

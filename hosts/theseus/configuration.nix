@@ -20,7 +20,6 @@ in {
     ../../modules/users/nikolai
     ../../modules/workstation.nix
     ./hardware-configuration.nix
-
   ];
 
   boot = {
@@ -58,8 +57,9 @@ in {
 
   nixpkgs.config = {
     allowUnfree = true;
+    allowUnfreePredicate = true;
     autoOptimiseStore = true;
-    packageOverrides = pkgs: {
+    packageOverrides = pkgs: rec{
       unstable = import unstableTarball { config = config.nixpkgs.config; };
     };
   };

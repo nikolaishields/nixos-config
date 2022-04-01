@@ -5,6 +5,7 @@ let
     url = "https://github.com/nix-community/impermanence.git";
     ref = "master";
   };
+
 in {
   security = {
     sudo.wheelNeedsPassword = false;
@@ -43,6 +44,7 @@ in {
  
     home.stateVersion = "21.11";
 
+    xdg.configFile."i3/config".text = builtins.readFile ./i3;
     home.packages = with pkgs.unstable; [
       nixos-generators
       ffmpeg
@@ -53,10 +55,13 @@ in {
       htop
       jq
       k9s
+      kanshi
       kubectl
+      logseq
       lorri
       nerdfonts
       niv
+      rofi
       pass
       pinentry
       ranger
@@ -70,6 +75,7 @@ in {
       youtube-dl
       yubikey-manager
       yubikey-manager-qt
+      light
     ];
 
     services = {
@@ -80,6 +86,30 @@ in {
 
       keybase = {
         enable = true;
+      };
+
+      picom = {
+        enable = true;
+        vSync = true;
+      };
+
+      sxhkd = {
+        enable = true;
+        package = pkgs.unstable.sxhkd;
+        extraConfig = builtins.readFile ./keybindings;
+      };
+
+      kanshi = {
+        enable = true;
+        package = pkgs.unstable.kanshi;
+        profiles = {
+          docked = {
+            outputs = [{ criteria = ""; }];
+          };
+          undocked = {
+            outputs = [{ criteria = ""; }];
+          };
+        };
       };
 
       gpg-agent = {

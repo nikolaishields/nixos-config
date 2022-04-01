@@ -4,16 +4,8 @@
     discord
     firefox
     fprintd
-    gnome.gnome-shell
-    gnome.gnome-tweaks
     pinentry-gnome
-    gnome.pomodoro
-    gnomeExtensions.appindicator
     keybase-gui
-    gnomeExtensions.gtile
-    gnomeExtensions.sound-output-device-chooser
-    gnomeExtensions.spotify-tray
-    gnomeExtensions.vitals
     google-chrome
     gparted
     gsettings-desktop-schemas
@@ -27,6 +19,10 @@
     pavucontrol
     slack
     spotify
+    steam
+#    steamPackages.steam
+#    steamPackages.steamcmd
+#    steamPackages.steam-runtime-wrapped
     tilix
     xdg-desktop-portal
     xdg-desktop-portal-gnome
@@ -39,9 +35,24 @@
     xserver = {
       enable = true;
       layout = "us";
-      displayManager.gdm.enable = true;
-      displayManager.gdm.wayland = false;
-      desktopManager.gnome.enable = true;
+      xkbOptions = "ctrl:swapcaps";
+      desktopManager = {
+        xterm.enable = false;
+      };
+
+      displayManager = {
+        defaultSession = "none+i3";
+        gdm = {
+          enable = true;
+          wayland = true;
+        };
+      };
+
+      windowManager = {
+        i3.enable = true;
+      };
+
+      libinput.enable = true;
     };
 
 
