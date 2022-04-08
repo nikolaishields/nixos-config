@@ -20,9 +20,6 @@
     slack
     spotify
     steam
-#    steamPackages.steam
-#    steamPackages.steamcmd
-#    steamPackages.steam-runtime-wrapped
     tilix
     xdg-desktop-portal
     xdg-desktop-portal-gnome
@@ -41,17 +38,12 @@
       };
 
       displayManager = {
-        defaultSession = "none+i3";
         gdm = {
           enable = true;
-          wayland = true;
+          wayland = false;
         };
       };
-
-      windowManager = {
-        i3.enable = true;
-      };
-
+      desktopManager.gnome.enable = true;
       libinput.enable = true;
     };
 

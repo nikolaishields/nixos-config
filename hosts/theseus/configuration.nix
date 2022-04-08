@@ -1,21 +1,6 @@
-{ config, lib, pkgs, ... }:
-let
-  unstableTarball = fetchTarball
-    "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-  impermanence = builtins.fetchGit {
-    url = "https://github.com/nix-community/impermanence.git";
-    ref = "master";
-  };
-in {
-  imports = 
-  [
-    (import "${impermanence}/nixos.nix")
-    ../../modules/base-packages.nix
-    ../../modules/monitoring/default.nix
-    ../../modules/networking/default.nix
+{ config, lib, pkgs, ... }: let unstableTarball = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz"; impermanence = builtins.fetchGit { url = "https://github.com/nix-community/impermanence.git"; ref = "master"; }; in { imports = [ (import "${impermanence}/nixos.nix") ../../modules/base-packages.nix ../../modules/monitoring/default.nix ../../modules/networking/default.nix ../../modules/services/docker.nix
     ../../modules/services/firecracker.nix
     ../../modules/services/libvirt.nix
-    ../../modules/services/docker.nix
     ../../modules/services/yubikey.nix
     ../../modules/users/nikolai
     ../../modules/workstation.nix
@@ -63,6 +48,16 @@ in {
       unstable = import unstableTarball { config = config.nixpkgs.config; };
     };
   };
+
+  nixpkgs.overlays = [
+    (self: super: {
+      keybase = pkgs.unstable.keybase;
+      keybase-gui = pkgs.unstable.keybase;
+      kbfs = pkgs.unstable.kbfs;
+    })
+  ];
+
+
 
   time = {
     timeZone = "US/Central";

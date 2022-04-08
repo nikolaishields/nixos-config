@@ -70,6 +70,8 @@ in {
       tealdeer
       tmux
       vagrant
+      ignite
+      firecracker
       whois
       youtube-dl
       yubikey-manager
