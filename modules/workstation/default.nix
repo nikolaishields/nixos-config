@@ -1,22 +1,25 @@
 { config, pkgs, ... }: {
+
   environment.systemPackages = with pkgs.unstable; [
     chromium
     discord
     firefox
     fprintd
-    pinentry-gnome
-    keybase-gui
     google-chrome
     gparted
     gsettings-desktop-schemas
     gtk-engine-murrine
     gtk_engines
     inkscape
+    keybase-gui
     libfprint
     libreoffice
     mpv
     obs-studio
+    paperkey
     pavucontrol
+    pinentry-gnome
+    pinentry-qt
     slack
     spotify
     steam
@@ -24,9 +27,26 @@
     xdg-desktop-portal
     xdg-desktop-portal-gnome
     xdg-desktop-portal-gtk
-    paperkey
-    pinentry-qt
   ];
+
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true; # so that gtk works properly
+    extraPackages = with pkgs.unstable; [
+      kanshi
+      mako
+      rofi
+      swayidle
+      swaylock
+      waybar
+      wdisplays
+      wl-clipboard
+      wofi
+    ];
+  };
+
+  # Screensharing for wayland
+  xdg.portal.wlr.enable = true;
 
   services = {
     xserver = {

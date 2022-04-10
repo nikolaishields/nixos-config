@@ -1,7 +1,6 @@
-{ ... }:
+{ config, pkgs, ... }: 
 {
   imports = [
-    ../users
     ../networking
   ];
 
@@ -18,4 +17,24 @@
     enable = true;
     dnssec = "false";
   };
+
+  environment.binsh = "${pkgs.dash}/bin/dash";
+
+  environment.systemPackages = with pkgs.unstable; [
+    parted
+    bash
+    nixfmt
+    curl
+    dash
+    fwupd
+    htop
+    exodus
+    pass
+    ripgrep
+    usbutils
+    vault
+    vim
+    wget
+    zfs
+  ];
 }

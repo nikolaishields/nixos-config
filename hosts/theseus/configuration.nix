@@ -9,14 +9,14 @@ let
 in {
   imports = [
     (import "${impermanence}/nixos.nix")
-    ../../modules/base-packages.nix
-    ../../modules/monitoring/default.nix
-    ../../modules/networking/default.nix
-    ../../modules/services/docker.nix
-    ../../modules/services/libvirt.nix
-    ../../modules/services/yubikey.nix
-    ../../modules/users/nikolai
-    ../../modules/workstation.nix
+    ../../modules/base
+    ../../modules/monitoring
+    ../../modules/networking
+    ../../modules/workstation
+    ../../users/nikolai
+    ../../modules/services/docker
+    ../../modules/services/libvirt
+    ../../modules/services/yubikey
     ./hardware-configuration.nix
   ];
 
@@ -53,22 +53,24 @@ in {
     '';
   };
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    allowUnfreePredicate = true;
-    autoOptimiseStore = true;
-    packageOverrides = pkgs: rec{
-      unstable = import unstableTarball { config = config.nixpkgs.config; };
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = true;
+      autoOptimiseStore = true;
+      packageOverrides = pkgs: rec{
+        unstable = import unstableTarball { config = config.nixpkgs.config; };
+      };
     };
-  };
 
-  nixpkgs.overlays = [
-    (self: super: {
-      keybase = pkgs.unstable.keybase;
-      keybase-gui = pkgs.unstable.keybase;
-      kbfs = pkgs.unstable.kbfs;
-    })
-  ];
+    overlays = [
+      (self: super: {
+        keybase = pkgs.unstable.keybase;
+        keybase-gui = pkgs.unstable.keybase;
+        kbfs = pkgs.unstable.kbfs;
+      })
+    ];
+  };
 
   time = {
     timeZone = "US/Central";
@@ -96,6 +98,5 @@ in {
   };
 
   system.stateVersion = "22.05";
-
 }
 

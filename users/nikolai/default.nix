@@ -36,6 +36,10 @@ in {
     home.username = "nikolai";
     home.homeDirectory = "/home/nikolai";
 
+    imports = [
+      ./sway.nix
+    ];
+
     home.file = {
       ".config/nvim/lua/nikolaishields" = {
       source = ./nvim/lua/nikolaishields;
@@ -46,6 +50,13 @@ in {
     home.stateVersion = "21.11";
 
     home.packages = with pkgs.unstable; [
+      gtk-engine-murrine
+      grim
+      slurp
+      gammastep
+      gtk_engines
+      gsettings-desktop-schemas
+      lxappearance
       ffmpeg
       file
       fira-code-symbols
@@ -74,20 +85,13 @@ in {
       vagrant
       whois
       wl-clipboard
+      mako
       youtube-dl
       yubikey-manager
       yubikey-manager-qt
     ];
 
-    wayland.windowManager = {
-      sway = {
-        enable = true;
-        package = pkgs.unstable.sway;
-      };
-    };
-
     services = {
-    # TODO: Get latest keybase working
       kbfs = {
         enable = true;
       };
@@ -102,13 +106,13 @@ in {
       };
 
       sxhkd = {
-        enable = true;
+        enable = false;
         package = pkgs.unstable.sxhkd;
         extraConfig = builtins.readFile ./keybindings;
       };
 
       kanshi = {
-        enable = true;
+        enable = false;
         package = pkgs.unstable.kanshi;
         profiles = {
           docked = {
