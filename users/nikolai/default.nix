@@ -121,14 +121,29 @@ in {
       };
 
       kanshi = {
-        enable = false;
+        enable = true;
         package = pkgs.unstable.kanshi;
         profiles = {
           docked = {
-            outputs = [{ criteria = ""; }];
+            outputs = [
+              { 
+                criteria = "Goldstar Company Ltd LG HDR WQHD"; 
+                status = "enable";
+              }
+              {
+                criteria = "eDP-1";
+                status = "disable";
+              }
+
+            ];
           };
           undocked = {
-            outputs = [{ criteria = ""; }];
+            outputs = [
+              {
+                criteria = "eDP-1";
+                status = "enable";
+              }
+            ];
           };
         };
       };
