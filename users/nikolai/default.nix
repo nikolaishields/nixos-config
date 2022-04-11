@@ -105,6 +105,15 @@ in {
         vSync = true;
       };
 
+      gammastep = {
+        enable = true;
+        package = pkgs.unstable.gammastep;
+        provider = "manual";
+        latitude = "29.74";
+        longitude = "-95.35";
+        tray = true;
+      };
+
       sxhkd = {
         enable = false;
         package = pkgs.unstable.sxhkd;
