@@ -1,6 +1,4 @@
 { config, pkgs, ... }: {
-
-
   environment.systemPackages = with pkgs.unstable; [
     chromium
     discord
@@ -19,37 +17,52 @@
     obs-studio
     paperkey
     pavucontrol
-    pinentry-gnome
     pinentry-qt
     slack
     spotify
     steam
     tilix
-    xdg-desktop-portal
-    xdg-desktop-portal-gnome
-    xdg-desktop-portal-gtk
+    greetd.greetd
   ];
 
   programs.sway = {
     enable = true;
-    wrapperFeatures.gtk = true; # so that gtk works properly
+    wrapperFeatures.gtk = true;
     extraPackages = with pkgs.unstable; [
-      kanshi
-      mako
-      rofi
       swayidle
       swaylock
-      waybar
       wdisplays
       wl-clipboard
-      wofi
     ];
   };
 
   # Screensharing for wayland
-  xdg.portal.wlr.enable = true;
+  xdg.portal = {
+    wlr.enable = true;
+    enable = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
+    gtkUsePortal = true;
+  };
 
-  services = {
+   services = {
+     greetd = {
+      enable = true;
+      settings = {
+        default_session= {
+          command = "${pkgs.unstable.greetd.greetd}/bin/agreety --cmd sway";
+        };
+      };
+    };
+
+    gnome = {
+      gnome-keyring.enable = true;
+      core-utilities.enable = true;
+      core-shell.enable = true;
+      core-os-services.enable = true;
+      glib-networking.enable = true;
+      gnome-settings-daemon.enable = true;
+    };
+
     xserver = {
       enable = true;
       layout = "us";
@@ -58,25 +71,14 @@
         xterm.enable = false;
       };
 
-      displayManager = {
-        gdm = {
-          enable = true;
-          wayland = true;
-        };
-      };
-      desktopManager.gnome.enable = true;
       libinput.enable = true;
     };
 
-
-    dbus.packages = [ pkgs.gnome.dconf ];
+    dbus.enable = true;
 
     udev.packages = [ pkgs.gnome.gnome-settings-daemon pkgs.unstable.yubikey-personalization ];
 
-    # Swap Caps Lock to CTRL/ESC
-    interception-tools.enable = true;
-
-    fprintd.enable = true;
+    fprintd.enable = false;
 
     openssh.enable = true;
 

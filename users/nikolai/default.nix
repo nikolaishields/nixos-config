@@ -56,7 +56,8 @@ in {
       gammastep
       gtk_engines
       gsettings-desktop-schemas
-      lxappearance
+      material-design-icons
+      material-icons
       ffmpeg
       file
       fira-code-symbols
@@ -85,7 +86,6 @@ in {
       vagrant
       whois
       wl-clipboard
-      mako
       youtube-dl
       yubikey-manager
       yubikey-manager-qt
@@ -178,6 +178,22 @@ in {
         enable = true;
         package = pkgs.unstable.fzf;
         enableZshIntegration = true;
+      };
+
+      waybar = {
+        enable = true;
+        package = pkgs.unstable.waybar;
+        style = ./waybar/style.css;
+      };
+      
+      mako = {
+        enable = true;
+        anchor = "top-center";
+        backgroundColor = "#3b4252";
+        borderColor = "#4c566a";
+        defaultTimeout = 5000;
+        font = "Fira Code 10";
+        groupBy = "summary";
       };
 
       zsh = {
