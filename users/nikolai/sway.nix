@@ -18,6 +18,7 @@ in
       enable = true;
       package = pkgs.unstable.sway;
       wrapperFeatures.gtk = true ;
+      
       config = {
         gaps = {
           smartBorders = "on";

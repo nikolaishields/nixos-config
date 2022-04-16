@@ -27,7 +27,7 @@ in {
     supportedFilesystems = [ "ext4" ];
     kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [ "kvm-intel" "v4l2loopback" ];
-    kernelParams = [ "mem_sleep_default=deep" "nohibernate" ];
+    kernelParams = [ "mem_sleep_default=deep" "nohibernate" "console=tty1" ];
 
     extraModulePackages = [ pkgs.linuxPackages_latest.v4l2loopback ];
     extraModprobeConfig = ''

@@ -6,6 +6,7 @@
     fprintd
     google-chrome
     gparted
+    greetd.greetd
     gsettings-desktop-schemas
     gtk-engine-murrine
     gtk_engines
@@ -13,28 +14,23 @@
     keybase-gui
     libfprint
     libreoffice
+    lxappearance
     mpv
     obs-studio
     paperkey
     pavucontrol
     pinentry-qt
+    polkit_gnome
     slack
     spotify
     steam
+    swayidle
+    swaylock
     tilix
-    greetd.greetd
+    wdisplays
+    wl-clipboard
+    xwayland
   ];
-
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
-    extraPackages = with pkgs.unstable; [
-      swayidle
-      swaylock
-      wdisplays
-      wl-clipboard
-    ];
-  };
 
   # Screensharing for wayland
   xdg.portal = {
@@ -45,21 +41,31 @@
   };
 
    services = {
-     greetd = {
+    dbus.enable = true;
+    udev.packages = [ pkgs.gnome.gnome-settings-daemon pkgs.unstable.yubikey-personalization ];
+    fprintd.enable = false;
+    openssh.enable = true;
+    fwupd.enable = true;
+    printing.enable = true;
+
+    greetd = {
       enable = true;
+      restart = true;
+      vt = 2;
       settings = {
         default_session= {
-          command = "${pkgs.unstable.greetd.greetd}/bin/agreety --cmd sway";
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+          user = "greeter";
         };
       };
     };
 
     gnome = {
-      gnome-keyring.enable = true;
-      core-utilities.enable = true;
-      core-shell.enable = true;
       core-os-services.enable = true;
+      core-shell.enable = true;
+      core-utilities.enable = true;
       glib-networking.enable = true;
+      gnome-keyring.enable = true;
       gnome-settings-daemon.enable = true;
     };
 
@@ -72,19 +78,8 @@
       };
 
       libinput.enable = true;
+      displayManager.lightdm.enable = false;
     };
-
-    dbus.enable = true;
-
-    udev.packages = [ pkgs.gnome.gnome-settings-daemon pkgs.unstable.yubikey-personalization ];
-
-    fprintd.enable = false;
-
-    openssh.enable = true;
-
-    fwupd.enable = true;
-
-    printing.enable = true;
 
     pipewire = {
       enable = true;
