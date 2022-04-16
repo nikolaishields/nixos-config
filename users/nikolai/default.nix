@@ -12,9 +12,11 @@ in {
     rtkit.enable = true;
   };
 
+  users.mutableUsers = true;
   users.users.nikolai = {
     isNormalUser = true;
     shell = pkgs.unstable.zsh;
+    password = "test";
     extraGroups = [ "docker" "wheel" "networkmanager" "input" "libvirtd" ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMrs3AFRgL4YfA7aMAD7X3O9kihcSCJKY8GiyWYV6Jwx nikolai@nikolaishields.com"
@@ -34,6 +36,10 @@ in {
     home.username = "nikolai";
     home.homeDirectory = "/home/nikolai";
 
+    imports = [
+      ./sway.nix
+    ];
+
     home.file = {
       ".config/nvim/lua/nikolaishields" = {
       source = ./nvim/lua/nikolaishields;
@@ -43,42 +49,51 @@ in {
  
     home.stateVersion = "21.11";
 
-    xdg.configFile."i3/config".text = builtins.readFile ./i3;
     home.packages = with pkgs.unstable; [
-      nixos-generators
+      gtk-engine-murrine
+      grim
+      slurp
+      gammastep
+      gtk_engines
+      gsettings-desktop-schemas
+      material-design-icons
+      material-icons
       ffmpeg
       file
       fira-code-symbols
       font-awesome
       gnumake
+      eww-wayland
       htop
+      obs-studio-plugins.wlrobs
       jq
       k9s
       kanshi
       kubectl
+      light
       logseq
       lorri
       nerdfonts
       niv
-      rofi
+      nixos-generators
       pass
       pinentry
       ranger
       ripgrep
+      rofi
       shellcheck
       sops
       tealdeer
       tmux
       vagrant
       whois
+      wl-clipboard
       youtube-dl
       yubikey-manager
       yubikey-manager-qt
-      light
     ];
 
     services = {
-    # TODO: Get latest keybase working
       kbfs = {
         enable = true;
       };
@@ -92,8 +107,17 @@ in {
         vSync = true;
       };
 
-      sxhkd = {
+      gammastep = {
         enable = true;
+        package = pkgs.unstable.gammastep;
+        provider = "manual";
+        latitude = "29.74";
+        longitude = "-95.35";
+        tray = true;
+      };
+
+      sxhkd = {
+        enable = false;
         package = pkgs.unstable.sxhkd;
         extraConfig = builtins.readFile ./keybindings;
       };
@@ -103,10 +127,25 @@ in {
         package = pkgs.unstable.kanshi;
         profiles = {
           docked = {
-            outputs = [{ criteria = ""; }];
+            outputs = [
+              { 
+                criteria = "Goldstar Company Ltd LG HDR WQHD"; 
+                status = "enable";
+              }
+              {
+                criteria = "eDP-1";
+                status = "disable";
+              }
+
+            ];
           };
           undocked = {
-            outputs = [{ criteria = ""; }];
+            outputs = [
+              {
+                criteria = "eDP-1";
+                status = "enable";
+              }
+            ];
           };
         };
       };
@@ -141,6 +180,22 @@ in {
         enable = true;
         package = pkgs.unstable.fzf;
         enableZshIntegration = true;
+      };
+
+      waybar = {
+        enable = true;
+        package = pkgs.unstable.waybar;
+        style = ./waybar/style.css;
+      };
+      
+      mako = {
+        enable = true;
+        anchor = "top-center";
+        backgroundColor = "#3b4252";
+        borderColor = "#4c566a";
+        defaultTimeout = 5000;
+        font = "Fira Code 10";
+        groupBy = "summary";
       };
 
       zsh = {
@@ -222,7 +277,6 @@ in {
           undotree
           vim-fugitive
           vim-gitgutter
-          vim-go
         ];
       };
 

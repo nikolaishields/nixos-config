@@ -1,24 +1,22 @@
-{ config, lib, pkgs, ... }:
-let
-  unstableTarball = fetchTarball
-    "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-  impermanence = builtins.fetchGit {
+{ config, lib, pkgs, ... }: 
+let 
+  unstableTarball = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+  impermanence = builtins.fetchGit { 
     url = "https://github.com/nix-community/impermanence.git";
     ref = "master";
   };
+
 in {
-  imports = 
-  [
+  imports = [
     (import "${impermanence}/nixos.nix")
-    ../../modules/base-packages.nix
-    ../../modules/monitoring/default.nix
-    ../../modules/networking/default.nix
-    ../../modules/services/firecracker.nix
-    ../../modules/services/libvirt.nix
-    ../../modules/services/docker.nix
-    ../../modules/services/yubikey.nix
-    ../../modules/users/nikolai
-    ../../modules/workstation.nix
+    ../../modules/base
+    ../../modules/monitoring
+    ../../modules/networking
+    ../../modules/workstation
+    ../../users/nikolai
+    ../../modules/services/docker
+    ../../modules/services/libvirt
+    ../../modules/services/yubikey
     ./hardware-configuration.nix
   ];
 
@@ -29,7 +27,7 @@ in {
     supportedFilesystems = [ "ext4" ];
     kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [ "kvm-intel" "v4l2loopback" ];
-    kernelParams = [ "mem_sleep_default=deep" "nohibernate" ];
+    kernelParams = [ "mem_sleep_default=deep" "nohibernate" "console=tty1" ];
 
     extraModulePackages = [ pkgs.linuxPackages_latest.v4l2loopback ];
     extraModprobeConfig = ''
@@ -45,6 +43,7 @@ in {
     initrd = {
       supportedFilesystems = [ "ext4" ];
       availableKernelModules = [ "xhci_pci" "nvme" ];
+      kernelModules = [ "i915" ];
     };
   };
 
@@ -55,18 +54,36 @@ in {
     '';
   };
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    allowUnfreePredicate = true;
-    autoOptimiseStore = true;
-    packageOverrides = pkgs: rec{
-      unstable = import unstableTarball { config = config.nixpkgs.config; };
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowunfreepredicate =  pkg: builtins.elem (lib.getname pkg) [
+        "steam"
+        "steam-original"
+        "steam-runtime"
+      ];
+      autoOptimiseStore = true;
+      packageOverrides = pkgs: rec{
+        unstable = import unstableTarball { config = config.nixpkgs.config; };
+      };
     };
+
+    overlays = [
+      (self: super: {
+        keybase = pkgs.unstable.keybase;
+        keybase-gui = pkgs.unstable.keybase;
+        kbfs = pkgs.unstable.kbfs;
+      })
+    ];
   };
 
   time = {
     timeZone = "US/Central";
     hardwareClockInLocalTime = true;
+  };
+
+  environment.variables = {
+    VDPAU_DRIVER = lib.mkIf config.hardware.opengl.enable (lib.mkDefault "va_gl");
   };
 
   hardware = {
@@ -77,6 +94,19 @@ in {
     logitech.wireless.enable = true;
     logitech.wireless.enableGraphical = true;
     video.hidpi.enable = lib.mkDefault true;
+    opengl = {
+      enable = true;
+      extraPackages = with pkgs; [
+        intel-media-driver
+        vaapiIntel
+        vaapiVdpau
+        libvdpau-va-gl
+      ];
+      driSupport = true;
+      driSupport32Bit = true;
+    };
+    steam-hardware.enable = true;
+    nvidia.modesetting.enable = true;
   };
 
   networking = {
@@ -90,6 +120,5 @@ in {
   };
 
   system.stateVersion = "22.05";
-
 }
 
