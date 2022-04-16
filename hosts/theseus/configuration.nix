@@ -43,6 +43,7 @@ in {
     initrd = {
       supportedFilesystems = [ "ext4" ];
       availableKernelModules = [ "xhci_pci" "nvme" ];
+      kernelModules = [ "i915" ];
     };
   };
 
@@ -56,7 +57,11 @@ in {
   nixpkgs = {
     config = {
       allowUnfree = true;
-      allowUnfreePredicate = true;
+      allowunfreepredicate =  pkg: builtins.elem (lib.getname pkg) [
+        "steam"
+        "steam-original"
+        "steam-runtime"
+      ];
       autoOptimiseStore = true;
       packageOverrides = pkgs: rec{
         unstable = import unstableTarball { config = config.nixpkgs.config; };
@@ -77,6 +82,10 @@ in {
     hardwareClockInLocalTime = true;
   };
 
+  environment.variables = {
+    VDPAU_DRIVER = lib.mkIf config.hardware.opengl.enable (lib.mkDefault "va_gl");
+  };
+
   hardware = {
     bluetooth.enable = true;
     pulseaudio.enable = false;
@@ -85,6 +94,19 @@ in {
     logitech.wireless.enable = true;
     logitech.wireless.enableGraphical = true;
     video.hidpi.enable = lib.mkDefault true;
+    opengl = {
+      enable = true;
+      extraPackages = with pkgs; [
+        intel-media-driver
+        vaapiIntel
+        vaapiVdpau
+        libvdpau-va-gl
+      ];
+      driSupport = true;
+      driSupport32Bit = true;
+    };
+    steam-hardware.enable = true;
+    nvidia.modesetting.enable = true;
   };
 
   networking = {

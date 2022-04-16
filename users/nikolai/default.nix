@@ -63,7 +63,9 @@ in {
       fira-code-symbols
       font-awesome
       gnumake
+      eww-wayland
       htop
+      obs-studio-plugins.wlrobs
       jq
       k9s
       kanshi

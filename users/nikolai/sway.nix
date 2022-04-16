@@ -101,6 +101,7 @@ in
           "${modifier}+Shift+0" = "move container to workspace number 10";
           "${modifier}+b" = "splith";
           "${modifier}+v" = "splitv";
+
           # Switch the current container between different layout styles
           "${modifier}+s" = "layout stacking";
           "${modifier}+w" = "layout tabbed";
@@ -131,7 +132,21 @@ in
             "Return" = "mode 'default'";
             "Escape" = "mode 'default'";
           };
+
   
+        };
+
+        window.commands = [
+          { 
+            command = "move window to workspace 10";
+            criteria = {
+              class = "Spotify";
+            }; 
+          }
+        ];
+        
+        assigns = {
+          "1" = [{ app_id = "^tilix$"; }];
         };
   
         startup = [
@@ -139,7 +154,6 @@ in
         ];
   
         terminal = "tilix";
-
         window.titlebar = false;
   
       };

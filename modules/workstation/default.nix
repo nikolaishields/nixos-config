@@ -24,6 +24,8 @@
     slack
     spotify
     steam
+    steam-run-native
+    eidolon
     swayidle
     swaylock
     tilix
@@ -31,6 +33,11 @@
     wl-clipboard
     xwayland
   ];
+
+  programs = {
+    steam.enable = true;
+    xwayland.enable = true;
+  };
 
   # Screensharing for wayland
   xdg.portal = {
@@ -40,7 +47,7 @@
     gtkUsePortal = true;
   };
 
-   services = {
+  services = {
     dbus.enable = true;
     udev.packages = [ pkgs.gnome.gnome-settings-daemon pkgs.unstable.yubikey-personalization ];
     fprintd.enable = false;
@@ -71,6 +78,13 @@
 
     xserver = {
       enable = true;
+      videoDrivers = [ 
+        "amdgpu"
+        "radeon"
+        "nouveau"
+        "modesetting"
+        "fbdev"
+      ];
       layout = "us";
       xkbOptions = "ctrl:swapcaps";
       desktopManager = {
