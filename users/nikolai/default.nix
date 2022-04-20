@@ -36,6 +36,24 @@ in {
     home.username = "nikolai";
     home.homeDirectory = "/home/nikolai";
 
+    xdg = {
+      enable = true;
+      userDirs = {
+        enable = true;
+        createDirectories = true;
+        desktop = "$HOME/.desktop";
+        documents = "$HOME/dox";
+        download = "$HOME/down";
+        music = "$HOME/music";
+        pictures = "$HOME/pics";
+        templates = "$HOME/.templates";
+        videos = "$HOME/videos";
+        extraConfig = {
+          XDG_CODE_DIR = "$HOME/src";
+        };
+      };
+    };
+
     imports = [
       ./sway.nix
     ];
@@ -50,6 +68,7 @@ in {
     home.stateVersion = "21.11";
 
     home.packages = with pkgs.unstable; [
+      brave
       gtk-engine-murrine
       grim
       slurp
