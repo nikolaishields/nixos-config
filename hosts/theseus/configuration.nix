@@ -108,8 +108,8 @@ in {
     steam-hardware.enable = true;
     nvidia.modesetting.enable = true;
   };
-  services.power-profiles-daemon.enable = false;
 
+  services.power-profiles-daemon.enable = false;
   services.tlp = {
     enable = true;
     settings = {
@@ -121,9 +121,12 @@ in {
     };
   };
 
+  systemd.services.NetworkManager-wait-online.enable = false;
   networking = {
     hostName = "theseus";
     hostId = "e7d11eb2";
+    dhcpcd.wait = "background";
+    dhcpcd.extraConfig = "noarp";
   };
 
   powerManagement = {

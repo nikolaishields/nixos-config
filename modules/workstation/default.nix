@@ -35,6 +35,7 @@
   ];
 
   programs = {
+    light.enable =true;
     steam.enable = true;
     xwayland.enable = true;
   };

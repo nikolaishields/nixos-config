@@ -150,6 +150,9 @@ in
           { 
             command = "mako";
           }
+          { 
+            command = "light -N 5";
+          }
         ];
   
         terminal = "tilix";
