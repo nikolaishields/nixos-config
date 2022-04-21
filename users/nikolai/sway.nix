@@ -101,7 +101,6 @@ in
           "${modifier}+Shift+0" = "move container to workspace number 10";
           "${modifier}+b" = "splith";
           "${modifier}+v" = "splitv";
-
           # Switch the current container between different layout styles
           "${modifier}+s" = "layout stacking";
           "${modifier}+w" = "layout tabbed";
@@ -116,7 +115,6 @@ in
           "${modifier}+a" = "focus parent";
           # Resizing containers
           "${modifier}+r" = "mode 'resize'";
-  
         };
   
         modes = {
@@ -132,8 +130,6 @@ in
             "Return" = "mode 'default'";
             "Escape" = "mode 'default'";
           };
-
-  
         };
 
         window.commands = [
@@ -147,15 +143,17 @@ in
         
         assigns = {
           "1" = [{ app_id = "^tilix$"; }];
+          "2" = [{ app_id = "^slack$"; }];
         };
   
         startup = [
-          { command = "mako"; }
+          { 
+            command = "mako";
+          }
         ];
   
         terminal = "tilix";
         window.titlebar = false;
-  
       };
     };
   };
