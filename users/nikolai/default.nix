@@ -155,6 +155,7 @@ in {
               {
                 criteria = "eDP-1";
                 status = "disable";
+                scale = 1.00;
               }
 
             ];
@@ -164,6 +165,7 @@ in {
               {
                 criteria = "eDP-1";
                 status = "enable";
+                scale = 1.25;
               }
             ];
           };
