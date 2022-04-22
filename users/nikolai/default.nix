@@ -93,6 +93,7 @@ in {
       logseq
       lorri
       nerdfonts
+      sysz
       niv
       nixos-generators
       pass
