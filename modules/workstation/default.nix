@@ -34,6 +34,8 @@
     xwayland
   ];
 
+  security.pam.services.nikolai.gnupg.enable = true;
+
   programs = {
     light.enable =true;
     steam.enable = true;

@@ -5,7 +5,6 @@ let
     url = "https://github.com/nix-community/impermanence.git";
     ref = "master";
   };
-
 in {
   security = {
     sudo.wheelNeedsPassword = false;
@@ -69,22 +68,18 @@ in {
 
     home.packages = with pkgs.unstable; [
       brave
-      gtk-engine-murrine
-      grim
-      slurp
-      gammastep
-      gtk_engines
-      gsettings-desktop-schemas
-      material-design-icons
-      material-icons
+      eww-wayland
       ffmpeg
       file
       fira-code-symbols
       font-awesome
+      gammastep
       gnumake
-      eww-wayland
+      grim
+      gsettings-desktop-schemas
+      gtk-engine-murrine
+      gtk_engines
       htop
-      obs-studio-plugins.wlrobs
       jq
       k9s
       kanshi
@@ -92,17 +87,21 @@ in {
       light
       logseq
       lorri
+      material-design-icons
+      material-icons
       nerdfonts
-      sysz
       niv
       nixos-generators
+      obs-studio-plugins.wlrobs
       pass
       pinentry
       ranger
       ripgrep
       rofi
       shellcheck
+      slurp
       sops
+      sysz
       tealdeer
       tmux
       vagrant
@@ -111,6 +110,7 @@ in {
       youtube-dl
       yubikey-manager
       yubikey-manager-qt
+      zoom-us
     ];
 
     services = {
@@ -187,9 +187,20 @@ in {
 
       bat.enable = true;
 
+      keychain = {
+        enable = false;
+        enableZshIntegration = true;
+        agents = [ "gpg" ];
+        package = pkgs.unstable.keychain;
+      };
+
       gpg = {
        enable = true; 
        package = pkgs.unstable.gnupg;
+      };
+
+      ssh = {
+        forwardAgent = true;
       };
 
       direnv = {
