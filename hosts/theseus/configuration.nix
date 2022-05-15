@@ -17,6 +17,7 @@ in {
     ../../modules/services/docker
     ../../modules/services/libvirt
     ../../modules/services/yubikey
+    ../../modules/services/shiori
     ./hardware-configuration.nix
   ];
 
