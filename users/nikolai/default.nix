@@ -67,7 +67,6 @@ in {
     home.stateVersion = "21.11";
 
     home.packages = with pkgs.unstable; [
-      brave
       eww-wayland
       ffmpeg
       file
@@ -79,13 +78,13 @@ in {
       gsettings-desktop-schemas
       gtk-engine-murrine
       gtk_engines
+      helm
       htop
       jq
       k9s
       kanshi
       kubectl
       light
-      logseq
       lorri
       material-design-icons
       material-icons
@@ -110,7 +109,6 @@ in {
       youtube-dl
       yubikey-manager
       yubikey-manager-qt
-      zoom-us
     ];
 
     services = {
@@ -254,6 +252,7 @@ in {
           EDITOR = "nvim"; 
           SSH_AUTH_SOCK = "$(gpgconf --list-dirs agent-ssh-socket)"; 
           GPG_TTY = "$(tty)";
+          NIXOS_OZONE_WL = "1";
         };
 
         dirHashes = {
@@ -268,16 +267,15 @@ in {
 
       vscode = {
         enable = true;
-        package = pkgs.unstable.vscode;
+        package = pkgs.unstable.vscodium;
         extensions = with pkgs.vscode-extensions; [
           golang.go
-          hashicorp.terraform
           ms-azuretools.vscode-docker
+          redhat.vscode-yaml
           ms-kubernetes-tools.vscode-kubernetes-tools
           ms-vscode-remote.remote-ssh
           ms-vsliveshare.vsliveshare
           vscodevim.vim
-          yzhang.markdown-all-in-one
         ];
       };
       
