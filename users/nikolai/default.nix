@@ -74,6 +74,7 @@ in {
       font-awesome
       gammastep
       gnumake
+      gopls
       grim
       gsettings-desktop-schemas
       gtk-engine-murrine
@@ -259,7 +260,7 @@ in {
           src = "$HOME/src";
           work = "$HOME/src/github.com/rancher/src";
           nas = "$HOME/src/github.com/nikolaishields";
-          nix = "$HOME/src/github.com/nixos";
+          nix = "$HOME/src/github.com/nikolaishields/nixos-config";
           dl = "$HOME/down";
         };
 
@@ -286,6 +287,8 @@ in {
         viAlias = true;
         withPython3 = true;
         extraPackages = with pkgs; [
+          gopls
+          nodePackages.bash-language-server
           ripgrep
           shfmt
           git
@@ -294,6 +297,10 @@ in {
         extraConfig = builtins.readFile nvim/vimrc;
 
         plugins = with pkgs.unstable.vimPlugins; [
+          nvim-cmp
+          cmp-nvim-lsp
+          cmp_luasnip
+          luasnip
           auto-pairs
           neoformat
           neomake
