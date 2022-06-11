@@ -1,14 +1,8 @@
 { config, lib, pkgs, ... }: 
 let 
   unstableTarball = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-  impermanence = builtins.fetchGit { 
-    url = "https://github.com/nix-community/impermanence.git";
-    ref = "master";
-  };
-
 in {
   imports = [
-    (import "${impermanence}/nixos.nix")
     ../../modules/base
     ../../modules/monitoring
     ../../modules/networking
@@ -22,9 +16,6 @@ in {
   ];
 
   boot = {
-    # TODO: ephemeral root
-    #  boot.initrd.postDeviceCommands = "zfs rollback -r rpool/local/root@blank";
-
     supportedFilesystems = [ "ext4" ];
     kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [ "kvm-intel" "v4l2loopback" ];
@@ -58,24 +49,11 @@ in {
   nixpkgs = {
     config = {
       allowUnfree = true;
-      allowunfreepredicate =  pkg: builtins.elem (lib.getname pkg) [
-        "steam"
-        "steam-original"
-        "steam-runtime"
-      ];
       autoOptimiseStore = true;
       packageOverrides = pkgs: rec{
         unstable = import unstableTarball { config = config.nixpkgs.config; };
       };
     };
-
-    overlays = [
-      (self: super: {
-        keybase = pkgs.unstable.keybase;
-        keybase-gui = pkgs.unstable.keybase;
-        kbfs = pkgs.unstable.kbfs;
-      })
-    ];
   };
 
   time = {

@@ -1,10 +1,6 @@
 { config, pkgs, ... }:
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
-  impermanence = builtins.fetchGit {
-    url = "https://github.com/nix-community/impermanence.git";
-    ref = "master";
-  };
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz";
 in {
   security = {
     sudo.wheelNeedsPassword = false;
@@ -25,7 +21,6 @@ in {
 
   imports = [
     (import "${home-manager}/nixos")
-    #(import "${impermanence}/home-manager.nix")
   ];
 
   home-manager.useGlobalPkgs = true;
@@ -64,7 +59,7 @@ in {
       };
     };
  
-    home.stateVersion = "21.11";
+    home.stateVersion = "22.05";
 
     home.packages = with pkgs.unstable; [
       eww-wayland
@@ -113,14 +108,6 @@ in {
     ];
 
     services = {
-      kbfs = {
-        enable = true;
-      };
-
-      keybase = {
-        enable = true;
-      };
-
       picom = {
         enable = true;
         vSync = true;
