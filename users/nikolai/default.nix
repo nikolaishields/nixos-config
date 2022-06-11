@@ -287,11 +287,12 @@ in {
         viAlias = true;
         withPython3 = true;
         extraPackages = with pkgs; [
+          git
           gopls
           nodePackages.bash-language-server
           ripgrep
           shfmt
-          git
+          terraform-ls
         ];
 
         extraConfig = builtins.readFile nvim/vimrc;
