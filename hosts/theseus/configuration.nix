@@ -11,7 +11,6 @@ in {
     ../../modules/services/docker
     ../../modules/services/libvirt
     ../../modules/services/yubikey
-    ../../modules/services/shiori
     ./hardware-configuration.nix
   ];
 
@@ -34,7 +33,7 @@ in {
 
     initrd = {
       supportedFilesystems = [ "ext4" ];
-      availableKernelModules = [ "xhci_pci" "nvme" ];
+      availableKernelModules = [ "xhci_pci" "nvme" "thunderbolt"];
       kernelModules = [ "i915" ];
     };
   };
@@ -84,8 +83,6 @@ in {
       driSupport = true;
       driSupport32Bit = true;
     };
-    steam-hardware.enable = true;
-    nvidia.modesetting.enable = true;
   };
 
   services.power-profiles-daemon.enable = false;

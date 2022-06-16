@@ -1,9 +1,5 @@
 { config, pkgs, ... }: 
 {
-  imports = [
-    ../networking
-  ];
-
   boot.cleanTmpDir = true;
 
   nix.autoOptimiseStore = true;
@@ -21,12 +17,14 @@
   environment.binsh = "${pkgs.dash}/bin/dash";
 
   environment.systemPackages = with pkgs.unstable; [
+    pciutils
     parted
     bash
     nixfmt
     curl
     dash
     fwupd
+    lshw
     htop
     exodus
     pass

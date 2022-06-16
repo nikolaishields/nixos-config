@@ -85,6 +85,7 @@ in {
       material-design-icons
       material-icons
       nerdfonts
+      openconnect
       niv
       nixos-generators
       obs-studio-plugins.wlrobs
