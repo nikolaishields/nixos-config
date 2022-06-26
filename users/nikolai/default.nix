@@ -76,6 +76,7 @@ in {
       gtk_engines
       helm
       htop
+      docker-compose
       jq
       k9s
       kanshi
@@ -90,11 +91,13 @@ in {
       nixos-generators
       obs-studio-plugins.wlrobs
       pass
+      go_1_18
       pinentry
       ranger
       ripgrep
       rofi
       shellcheck
+      virt-manager
       slurp
       sops
       sysz
