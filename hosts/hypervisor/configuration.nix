@@ -9,7 +9,7 @@ in {
     ../../modules/base
     ../../modules/networking
     ../../modules/services/libvirt
-    ../../modules/users/nikolai
+    ../../modules/users/nikolai/default.nix
   ];
 
   boot = {
