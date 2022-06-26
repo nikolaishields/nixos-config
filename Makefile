@@ -3,8 +3,8 @@ SHELL=/bin/sh
 .PHONY: all
 all: build
 
-.PHONY: theseus nas
-theseus nas:
+.PHONY: theseus nas hypervisor
+theseus nas hypervisor:
 	sudo ln -sf $(realpath hosts/$@/configuration.nix) /etc/nixos
 
 .PHONY: switch build test
