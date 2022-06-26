@@ -6,12 +6,10 @@ in {
 
   imports = 
   [
-    ../../modules/base-packages.nix
-    ../../modules/monitoring/default.nix
-    ../../modules/networking/default.nix
-    ../../modules/services/libvirt.nix
-    ../../modules/services/podman.nix
-    ../../modules/users/nikolai/default.nix
+    ../../modules/base
+    ../../modules/networking
+    ../../modules/services/libvirt
+    ../../modules/users/nikolai
   ];
 
   boot = {
