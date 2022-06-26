@@ -266,7 +266,6 @@ in {
           redhat.vscode-yaml
           ms-kubernetes-tools.vscode-kubernetes-tools
           ms-vscode-remote.remote-ssh
-          ms-vsliveshare.vsliveshare
           vscodevim.vim
         ];
       };
