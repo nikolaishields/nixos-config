@@ -16,6 +16,7 @@
     libreoffice
     lxappearance
     mpv
+    blueberry
     obs-studio
     paperkey
     pavucontrol
