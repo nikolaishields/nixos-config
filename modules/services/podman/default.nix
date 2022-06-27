@@ -1,8 +1,8 @@
 { config, pkgs, ... }: {
   virtualisation = {
     podman  = {
-      enable = false;
-      dockerCompat = true;
+      enable = true;
+      dockerCompat = false;
     };
   };
 }
