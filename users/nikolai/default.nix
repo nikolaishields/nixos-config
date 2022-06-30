@@ -60,7 +60,7 @@ in {
     };
 
     home.file = {
-      "/usr/local/bin/git-snapshot" = {
+      ".local/bin/git-snapshot" = {
       source = ./scripts/git-snapshot;
       };
     };
