@@ -58,6 +58,13 @@ in {
       recursive = true;
       };
     };
+
+    home.file = {
+      "/usr/local/bin/git-snapshot" = {
+      source = ./scripts/git-snapshot;
+      };
+    };
+ 
  
     home.stateVersion = "22.05";
 
