@@ -1,7 +1,5 @@
 { config, lib, pkgs, ... }: 
-let 
-  unstableTarball = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-in {
+{
   imports = [
     ../../modules/base
     ../../modules/monitoring
@@ -13,6 +11,13 @@ in {
     ../../modules/services/yubikey
     ./hardware-configuration.nix
   ];
+
+  networking = {
+    hostName = "theseus";
+    hostId = "e7d11eb2";
+    dhcpcd.wait = "background";
+    dhcpcd.extraConfig = "noarp";
+  };
 
   boot = {
     supportedFilesystems = [ "ext4" ];
@@ -49,10 +54,6 @@ in {
     config = {
       allowUnfree = true;
       autoOptimiseStore = true;
-      packageOverrides = pkgs: rec{
-        unstable = import unstableTarball { config = config.nixpkgs.config; };
-      };
-    };
   };
 
   time = {
@@ -85,25 +86,23 @@ in {
     };
   };
 
-  services.power-profiles-daemon.enable = false;
-  services.tlp = {
-    enable = true;
-    settings = {
-      CPU_BOOST_ON_BAT = 0;
-      CPU_SCALING_GOVERNOR_ON_BATTERY = "powersave";
-      START_CHARGE_THRESH_BAT0 = 90;
-      STOP_CHARGE_THRESH_BAT0 = 97;
-      RUNTIME_PM_ON_BAT = "auto";
+  services = {
+    tlp = {
+      enable = true;
+      settings = {
+        CPU_BOOST_ON_BAT = 0;
+        CPU_SCALING_GOVERNOR_ON_BATTERY = "powersave";
+        START_CHARGE_THRESH_BAT0 = 90;
+        STOP_CHARGE_THRESH_BAT0 = 97;
+        RUNTIME_PM_ON_BAT = "auto";
+      };
     };
+    
+    power-profiles-daemon.enable = false;
+
   };
 
   systemd.services.NetworkManager-wait-online.enable = false;
-  networking = {
-    hostName = "theseus";
-    hostId = "e7d11eb2";
-    dhcpcd.wait = "background";
-    dhcpcd.extraConfig = "noarp";
-  };
 
   powerManagement = {
     powertop.enable = true;
