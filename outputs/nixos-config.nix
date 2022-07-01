@@ -1,7 +1,7 @@
 { lib, inputs, system, ... }:
 
 {
-  workstation = lib.nixosSystem {
+  laptop = lib.nixosSystem {
     inherit system;
     specialArgs = { inherit inputs; };
     modules = [
