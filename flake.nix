@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-
+    flake-utils.url = "github:numtide/flake-utils";
     nurpkgs = {
       url = github:nix-community/NUR;
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,9 +15,10 @@
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, nurpkgs, home-manager }:
-    let
-      system = "x86_64-linux";
+  outputs = inputs @ { self, nixpkgs, nurpkgs, home-manager, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+    let 
+      pkgs = nixpkgs.legacyPackages.${system};
     in
     {
       nixos-configurations = (
@@ -27,11 +28,15 @@
         }
       );
 
-      devShell.${system} = (
-        import ./outputs/install.nix {
-          inherit system nixpkgs;
-        }
-      );
-    };
+      devShell = pkgs.mkShell {
+        name = "installation-shell";
+        buildInputs = with pkgs; [ 
+          curl
+          git
+          ripgrep
+          wget
+        ];
+      };
+   });
 }
 
