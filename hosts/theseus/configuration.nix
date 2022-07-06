@@ -3,14 +3,12 @@ let
   unstableTarball = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
 in {
   imports = [
+    ../../users/nikolai
     ../../modules/base
-    ../../modules/monitoring
     ../../modules/networking
     ../../modules/workstation
-    ../../users/nikolai
     ../../modules/services/docker
     ../../modules/services/libvirt
-    ../../modules/services/yubikey
     ./hardware-configuration.nix
   ];
 

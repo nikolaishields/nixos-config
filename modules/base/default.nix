@@ -16,7 +16,7 @@
 
   environment.binsh = "${pkgs.dash}/bin/dash";
 
-  environment.systemPackages = with pkgs.unstable; [
+  environment.systemPackages = with pkgs; [
     pciutils
     parted
     bash

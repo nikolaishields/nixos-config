@@ -66,9 +66,9 @@ in {
     };
  
  
-    home.stateVersion = "21.11";
+    home.stateVersion = "22.05";
 
-    home.packages = with pkgs; [
+    home.packages = with pkgs.unstable; [
       eww-wayland
       ffmpeg
       file
@@ -95,7 +95,7 @@ in {
       nixos-generators
       obs-studio-plugins.wlrobs
       pass
-      #go_1_18
+      go_1_18
       pinentry
       ranger
       ripgrep
@@ -123,7 +123,7 @@ in {
 
       gammastep = {
         enable = true;
-        package = pkgs.gammastep;
+        package = pkgs.unstable.gammastep;
         provider = "manual";
         latitude = "29.74";
         longitude = "-95.35";
@@ -132,13 +132,13 @@ in {
 
       sxhkd = {
         enable = false;
-        package = pkgs.sxhkd;
+        package = pkgs.unstable.sxhkd;
         extraConfig = builtins.readFile ./keybindings;
       };
 
       kanshi = {
         enable = true;
-        package = pkgs.kanshi;
+        package = pkgs.unstable.kanshi;
         profiles = {
           docked = {
             outputs = [
@@ -263,7 +263,7 @@ in {
 
       vscode = {
         enable = true;
-        package = pkgs.vscodium;
+        package = pkgs.unstable.vscodium;
         extensions = with pkgs.vscode-extensions; [
           golang.go
           redhat.vscode-yaml
@@ -274,11 +274,11 @@ in {
       
       neovim = {
         enable = true;
-        package = pkgs.neovim-unwrapped;
+        package = pkgs.unstable.neovim-unwrapped;
         vimAlias = true;
         viAlias = true;
         withPython3 = true;
-        extraPackages = with pkgs; [
+        extraPackages = with pkgs.unstable; [
           git
           gopls
           nodePackages.bash-language-server
@@ -289,7 +289,7 @@ in {
 
         extraConfig = builtins.readFile nvim/vimrc;
 
-        plugins = with pkgs.vimPlugins; [
+        plugins = with pkgs.unstable.vimPlugins; [
           nvim-cmp
           cmp-nvim-lsp
           cmp_luasnip
@@ -302,7 +302,7 @@ in {
           papercolor-theme
           plenary-nvim
           popup-nvim
-          #telescope-file-browser-nvim
+          telescope-file-browser-nvim
           telescope-fzy-native-nvim
           telescope-nvim
           undotree
