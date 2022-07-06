@@ -1,9 +1,5 @@
 { config, lib, pkgs, ... }:
-let
-  unstableTarball = fetchTarball
-    "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-in {
-
+{
   imports = 
   [
     ../../modules/base-packages.nix
@@ -55,8 +51,5 @@ in {
   powerManagement = {
     powertop.enable = true;
   };
-
-  system.stateVersion = "21.11";
-
 }
 

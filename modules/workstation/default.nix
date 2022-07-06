@@ -1,5 +1,5 @@
 { config, pkgs, ... }: {
-  environment.systemPackages = with pkgs.unstable; [
+  environment.systemPackages = with pkgs; [
     chromium
     discord
     firefox
@@ -24,8 +24,6 @@
     polkit_gnome
     slack
     spotify
-    steam
-    steam-run-native
     eidolon
     swayidle
     swaylock
@@ -53,7 +51,7 @@
 
   services = {
     dbus.enable = true;
-    udev.packages = [ pkgs.gnome.gnome-settings-daemon pkgs.unstable.yubikey-personalization ];
+    udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
     fprintd.enable = false;
     openssh.enable = true;
     fwupd.enable = true;

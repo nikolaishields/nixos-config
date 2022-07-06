@@ -10,7 +10,7 @@ in {
   users.mutableUsers = true;
   users.users.nikolai = {
     isNormalUser = true;
-    shell = pkgs.unstable.zsh;
+    shell = pkgs.zsh;
     password = "test";
     extraGroups = [  "video" "docker" "wheel" "networkmanager" "input" "libvirtd" ];
     openssh.authorizedKeys.keys = [
@@ -66,9 +66,9 @@ in {
     };
  
  
-    home.stateVersion = "22.05";
+    home.stateVersion = "21.11";
 
-    home.packages = with pkgs.unstable; [
+    home.packages = with pkgs; [
       eww-wayland
       ffmpeg
       file
@@ -89,16 +89,13 @@ in {
       kanshi
       kubectl
       light
-      lorri
-      material-design-icons
-      material-icons
       nerdfonts
       openconnect
       niv
       nixos-generators
       obs-studio-plugins.wlrobs
       pass
-      go_1_18
+      #go_1_18
       pinentry
       ranger
       ripgrep
@@ -126,7 +123,7 @@ in {
 
       gammastep = {
         enable = true;
-        package = pkgs.unstable.gammastep;
+        package = pkgs.gammastep;
         provider = "manual";
         latitude = "29.74";
         longitude = "-95.35";
@@ -135,13 +132,13 @@ in {
 
       sxhkd = {
         enable = false;
-        package = pkgs.unstable.sxhkd;
+        package = pkgs.sxhkd;
         extraConfig = builtins.readFile ./keybindings;
       };
 
       kanshi = {
         enable = true;
-        package = pkgs.unstable.kanshi;
+        package = pkgs.kanshi;
         profiles = {
           docked = {
             outputs = [
@@ -188,12 +185,12 @@ in {
         enable = false;
         enableZshIntegration = true;
         agents = [ "gpg" ];
-        package = pkgs.unstable.keychain;
+        package = pkgs.keychain;
       };
 
       gpg = {
        enable = true; 
-       package = pkgs.unstable.gnupg;
+       package = pkgs.gnupg;
       };
 
       ssh = {
@@ -208,13 +205,13 @@ in {
 
       fzf = {
         enable = true;
-        package = pkgs.unstable.fzf;
+        package = pkgs.fzf;
         enableZshIntegration = true;
       };
 
       waybar = {
         enable = true;
-        package = pkgs.unstable.waybar;
+        package = pkgs.waybar;
         style = ./waybar/style.css;
       };
       
@@ -266,12 +263,10 @@ in {
 
       vscode = {
         enable = true;
-        package = pkgs.unstable.vscodium;
+        package = pkgs.vscodium;
         extensions = with pkgs.vscode-extensions; [
           golang.go
-          ms-azuretools.vscode-docker
           redhat.vscode-yaml
-          ms-kubernetes-tools.vscode-kubernetes-tools
           ms-vscode-remote.remote-ssh
           vscodevim.vim
         ];
@@ -279,7 +274,7 @@ in {
       
       neovim = {
         enable = true;
-        package = pkgs.unstable.neovim-unwrapped;
+        package = pkgs.neovim-unwrapped;
         vimAlias = true;
         viAlias = true;
         withPython3 = true;
@@ -294,7 +289,7 @@ in {
 
         extraConfig = builtins.readFile nvim/vimrc;
 
-        plugins = with pkgs.unstable.vimPlugins; [
+        plugins = with pkgs.vimPlugins; [
           nvim-cmp
           cmp-nvim-lsp
           cmp_luasnip
@@ -307,7 +302,7 @@ in {
           papercolor-theme
           plenary-nvim
           popup-nvim
-          telescope-file-browser-nvim
+          #telescope-file-browser-nvim
           telescope-fzy-native-nvim
           telescope-nvim
           undotree
@@ -318,7 +313,7 @@ in {
 
       git = {
         enable = true;
-        package = pkgs.unstable.gitFull;
+        package = pkgs.gitFull;
         aliases = {
           co = "checkout";
           c = "commit";
