@@ -1,5 +1,5 @@
 { config, pkgs, ... }: {
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs.unstable; [
     chromium
     discord
     firefox
@@ -37,7 +37,6 @@
 
   programs = {
     light.enable =true;
-    steam.enable = true;
     xwayland.enable = true;
   };
 

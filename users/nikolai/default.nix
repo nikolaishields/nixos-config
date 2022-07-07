@@ -26,7 +26,6 @@ in {
   home-manager.useGlobalPkgs = true;
 
   home-manager.users.nikolai = {
-
     home.username = "nikolai";
     home.homeDirectory = "/home/nikolai";
 
@@ -69,13 +68,14 @@ in {
     home.stateVersion = "22.05";
 
     home.packages = with pkgs.unstable; [
-      eww-wayland
+      docker-compose
       ffmpeg
       file
       fira-code-symbols
       font-awesome
       gammastep
       gnumake
+      go_1_18
       gopls
       grim
       gsettings-desktop-schemas
@@ -83,31 +83,28 @@ in {
       gtk_engines
       helm
       htop
-      docker-compose
       jq
       k9s
       kanshi
       kubectl
       light
       nerdfonts
-      openconnect
-      niv
       nixos-generators
       obs-studio-plugins.wlrobs
+      openconnect
       pass
-      go_1_18
       pinentry
       ranger
       ripgrep
       rofi
       shellcheck
-      virt-manager
       slurp
       sops
       sysz
       tealdeer
       tmux
       vagrant
+      virt-manager
       whois
       wl-clipboard
       youtube-dl
@@ -131,7 +128,7 @@ in {
       };
 
       sxhkd = {
-        enable = false;
+        enable = true;
         package = pkgs.unstable.sxhkd;
         extraConfig = builtins.readFile ./keybindings;
       };
@@ -190,7 +187,7 @@ in {
 
       gpg = {
        enable = true; 
-       package = pkgs.gnupg;
+       package = pkgs.unstable.gnupg;
       };
 
       ssh = {
@@ -205,16 +202,10 @@ in {
 
       fzf = {
         enable = true;
-        package = pkgs.fzf;
+        package = pkgs.unstable.fzf;
         enableZshIntegration = true;
       };
 
-      waybar = {
-        enable = true;
-        package = pkgs.waybar;
-        style = ./waybar/style.css;
-      };
-      
       mako = {
         enable = true;
         anchor = "top-center";

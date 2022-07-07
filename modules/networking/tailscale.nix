@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  environment.systemPackages = [ pkgs.tailscale ];
+  environment.systemPackages = [ pkgs.unstable.tailscale ];
   networking.firewall = {
     # enable the firewall
     enable = true;
@@ -14,6 +14,7 @@
 
     # allow you to SSH in over the public internet
     allowedTCPPorts = [ 22 ];
+    checkReversePath = "loose";
   };
 
   services.tailscale.enable = true;
@@ -42,7 +43,7 @@
       fi
 
       # otherwise authenticate with tailscale
-      ${tailscale}/bin/tailscale up -authkey 
+      ${tailscale}/bin/tailscale up -authkey tskey-kMRNKu5CNTRL-QSxjQgj5KmhfkrCdpN9SZg --reset
     '';
   };
 }

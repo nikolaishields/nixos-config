@@ -7,7 +7,7 @@ let
   right = "l";
   up    = "k";
   resizeAmount = "30px";
-  filebrowser = "nemo";
+  filebrowser = "nautilus";
   webbrowser = "chrome";
   webbrowserPersistent = "firefox";
   musicplayer = "spotify";
@@ -16,7 +16,8 @@ in
   wayland.windowManager = {
     sway = {
       enable = true;
-      package = pkgs.unstable.sway;
+      xwayland = true;
+      package = pkgs.sway;
       wrapperFeatures.gtk = true ;
       
       config = {
@@ -152,6 +153,9 @@ in
           }
           { 
             command = "light -N 5";
+          }
+          {
+            command = "tilix";
           }
         ];
   
