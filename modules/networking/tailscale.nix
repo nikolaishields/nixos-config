@@ -43,7 +43,7 @@
       fi
 
       # otherwise authenticate with tailscale
-      ${tailscale}/bin/tailscale up -authkey tskey-kMRNKu5CNTRL-QSxjQgj5KmhfkrCdpN9SZg --reset
+      ${tailscale}/bin/tailscale up -authkey 
     '';
   };
 }
