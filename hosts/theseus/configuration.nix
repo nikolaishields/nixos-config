@@ -41,6 +41,8 @@ in {
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    gc.automatic = true;
+    gc.options = "--delete-older-than 8d";
   };
 
   nixpkgs = {
@@ -108,5 +110,6 @@ in {
   };
 
   system.stateVersion = "22.05";
+
 }
 
