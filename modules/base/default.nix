@@ -20,6 +20,7 @@
     pciutils
     parted
     bash
+    busybox
     nixfmt
     curl
     dash
