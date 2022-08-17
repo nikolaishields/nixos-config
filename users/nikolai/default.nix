@@ -88,6 +88,7 @@ in {
       kanshi
       kubectl
       light
+      logseq
       nerdfonts
       nixos-generators
       obs-studio-plugins.wlrobs
