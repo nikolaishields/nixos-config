@@ -9,7 +9,7 @@ theseus nas hypervisor:
 
 .PHONY: switch build test
 switch build test: 
-	sudo nixos-rebuild $@
+	sudo nixos-rebuild $@ --upgrade
 
 .PHONY: bootstrap
 bootstrap:
