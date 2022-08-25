@@ -104,6 +104,9 @@ in {
       sysz
       tealdeer
       tmux
+      kitty
+      wlogout
+      flameshot
       vagrant
       virt-manager
       whois
