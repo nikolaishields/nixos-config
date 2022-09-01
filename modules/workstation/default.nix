@@ -55,6 +55,7 @@
     openssh.enable = true;
     fwupd.enable = true;
     printing.enable = true;
+    yubikey-agent.enable = true;
 
     greetd = {
       enable = true;
