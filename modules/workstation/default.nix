@@ -1,7 +1,11 @@
 { config, pkgs, ... }: {
   environment.systemPackages = with pkgs.unstable; [
+    age
+    age-plugin-yubikey
+    blueberry
     chromium
     discord
+    eidolon
     firefox
     fprintd
     google-chrome
@@ -16,21 +20,24 @@
     libreoffice
     lxappearance
     mpv
-    blueberry
     obs-studio
     paperkey
     pavucontrol
     pinentry-qt
     polkit_gnome
+    rage
     slack
     spotify
-    eidolon
     swayidle
     swaylock
     tilix
+    tree
     wdisplays
     wl-clipboard
     xwayland
+    yubikey-manager
+    yubikey-personalization
+    yubikey-personalization-gui
   ];
 
   security.pam.services.nikolai.gnupg.enable = true;
@@ -50,12 +57,13 @@
 
   services = {
     dbus.enable = true;
-    udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
+    udev.packages = [ pkgs.gnome.gnome-settings-daemon pkgs.yubikey-personalization ];
     fprintd.enable = false;
     openssh.enable = true;
     fwupd.enable = true;
     printing.enable = true;
     yubikey-agent.enable = true;
+    pcscd.enable = true;
 
     greetd = {
       enable = true;
