@@ -14,6 +14,7 @@
     gsettings-desktop-schemas
     gtk-engine-murrine
     gtk_engines
+    opensc
     inkscape
     keybase-gui
     libfprint
