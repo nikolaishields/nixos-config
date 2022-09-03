@@ -244,6 +244,7 @@ in {
           SSH_AUTH_SOCK = "$(gpgconf --list-dirs agent-ssh-socket)"; 
           GPG_TTY = "$(tty)";
           NIXOS_OZONE_WL = "1";
+          PASSAGE_AGE = "rage";
         };
 
         dirHashes = {
