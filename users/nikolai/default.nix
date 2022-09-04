@@ -63,6 +63,12 @@ in {
       source = ./scripts/git-snapshot;
       };
     };
+
+    home.file = {
+      ".local/bin/pas" = {
+      source = ./scripts/pas;
+      };
+    };
  
  
     home.stateVersion = "22.05";
