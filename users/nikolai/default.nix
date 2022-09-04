@@ -239,11 +239,11 @@ in {
           theme = "awesomepanda";
         };
 
-        localVariables = { 
-          EDITOR = "nvim"; 
+        sessionVariables = {
           SSH_AUTH_SOCK = "$(gpgconf --list-dirs agent-ssh-socket)"; 
           GPG_TTY = "$(tty)";
           NIXOS_OZONE_WL = "1";
+          EDITOR = "nvim"; 
           PASSAGE_AGE = "rage";
         };
 

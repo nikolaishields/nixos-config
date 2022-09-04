@@ -27,7 +27,6 @@
     fwupd
     lshw
     htop
-    exodus
     pass
     ripgrep
     usbutils
