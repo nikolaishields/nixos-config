@@ -78,6 +78,7 @@ in {
       ffmpeg
       file
       fira-code-symbols
+      flameshot
       font-awesome
       gammastep
       gnumake
@@ -92,6 +93,7 @@ in {
       jq
       k9s
       kanshi
+      kitty
       kubectl
       light
       logseq
@@ -109,14 +111,13 @@ in {
       sops
       sysz
       tealdeer
+      thunderbird
       tmux
-      kitty
-      wlogout
-      flameshot
       vagrant
       virt-manager
       whois
       wl-clipboard
+      wlogout
       youtube-dl
       yubikey-manager
       yubikey-manager-qt
