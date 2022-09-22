@@ -4,6 +4,7 @@
     age-plugin-yubikey
     blueberry
     chromium
+    cinnamon.nemo
     discord
     eidolon
     firefox

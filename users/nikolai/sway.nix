@@ -7,7 +7,7 @@ let
   right = "l";
   up    = "k";
   resizeAmount = "30px";
-  filebrowser = "nautilus";
+  filebrowser = "nemo";
   webbrowser = "chrome";
   webbrowserPersistent = "firefox";
   musicplayer = "spotify";
