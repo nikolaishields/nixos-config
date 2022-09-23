@@ -293,9 +293,6 @@ in {
         extraConfig = builtins.readFile nvim/vimrc;
 
         plugins = with pkgs.unstable.vimPlugins; [
-          nvim-cmp
-          cmp-nvim-lsp
-          cmp_luasnip
           luasnip
           auto-pairs
           neoformat

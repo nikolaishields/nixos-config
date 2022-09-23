@@ -116,6 +116,11 @@ in
           "${modifier}+a" = "focus parent";
           # Resizing containers
           "${modifier}+r" = "mode 'resize'";
+          # Brightness Controls
+          "F7" = "exec light -U 5";
+          "F8" = "exec light -A 5";
+          "Shift+F7" = "exec light -S 20";
+          "Shift+F8" = "exec light -S 100";
         };
   
         modes = {
