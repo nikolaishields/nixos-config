@@ -150,17 +150,28 @@ in
         assigns = {
           "1" = [{ app_id = "^tilix$"; }];
           "2" = [{ app_id = "^slack$"; }];
+          "9" = [{ app_id = "^thunderbird$"; }];
+          "10" = [{ app_id = "^logseq$"; }];
         };
   
         startup = [
           { 
             command = "mako";
           }
-          { 
-            command = "light -N 5";
-          }
           {
             command = "tilix";
+          }
+          {
+            command = "logseq";
+          }
+          {
+            command = "thunderbird";
+          }
+          {
+            command = "dbus-sway-environment";
+          }
+          {
+            command = "configure-gtk";
           }
         ];
   
