@@ -309,7 +309,6 @@ in {
           telescope-nvim
           undotree
           vim-fugitive
-          vim-gitgutter
         ];
       };
 
