@@ -42,19 +42,12 @@ require("telescope").load_extension("fzy_native")
 require("telescope").load_extension("file_browser")
 
 local M = {}
-M.search_vimrc = function()
-    require("telescope.builtin").find_files({
-        prompt_title = "< vimrc >",
-        cwd = "~/.config/nvim",
-        hidden = true,
-    })
-end
 
-M.search_dotfiles = function()
+M.search_nixos_config = function()
     require("telescope.builtin").find_files({
-        prompt_title = "< dotfiles >",
-        cwd = "~/.dotfiles",
-        hidden = true,
+        prompt_title = "< nixos config >",
+        cwd = "$HOME/src/github.com/nikolaishields/nixos-config",
+        hidden = false,
     })
 end
 return M

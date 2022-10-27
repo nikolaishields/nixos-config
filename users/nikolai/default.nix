@@ -292,7 +292,7 @@ in {
 
         extraConfig = builtins.readFile nvim/vimrc;
 
-        plugins = with pkgs.unstable.vimPlugins; [
+        plugins = with pkgs.vimPlugins; [
           luasnip
           auto-pairs
           neoformat
@@ -302,6 +302,8 @@ in {
           papercolor-theme
           plenary-nvim
           popup-nvim
+          nvim-cmp
+          cmp-nvim-lsp
           telescope-file-browser-nvim
           telescope-fzy-native-nvim
           telescope-nvim

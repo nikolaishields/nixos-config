@@ -69,21 +69,15 @@ nnoremap <Leader>r :terminal <Space>
 " Switch between the last two files
 nnoremap <Leader><Leader> <C-^>
 
-" NERDTree
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
-
 " Telescope
 lua require("nikolaishields")
 nnoremap <leader>fs :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
 nnoremap <C-f> :lua require('telescope.builtin').git_files()<CR>
 nnoremap <Leader>ff :lua require('telescope.builtin').find_files()<CR>
+nnoremap <Leader>fb :Telescope file_browser<CR>
 nnoremap <leader>fw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
 nnoremap <leader>bf :lua require('telescope.builtin').buffers()<CR>
-nnoremap <leader>vrc :lua require('nikolaishields.telescope').search_vimrc()<CR>
-nnoremap <leader>dot :lua require('nikolaishields.telescope').search_dotfiles()<CR>
+nnoremap <leader>nix :lua require('nikolaishields.telescope').search_nixos_config()<CR>
 
 " Undotree
 lua require("nikolaishields")
