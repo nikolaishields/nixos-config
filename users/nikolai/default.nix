@@ -83,7 +83,6 @@ in {
       gammastep
       gnumake
       go_1_18
-      gopls
       grim
       gsettings-desktop-schemas
       gtk-engine-murrine
@@ -264,17 +263,6 @@ in {
 
       };
 
-      vscode = {
-        enable = true;
-        package = pkgs.unstable.vscodium;
-        extensions = with pkgs.vscode-extensions; [
-          golang.go
-          redhat.vscode-yaml
-          ms-vscode-remote.remote-ssh
-          vscodevim.vim
-        ];
-      };
-      
       neovim = {
         enable = true;
         package = pkgs.unstable.neovim-unwrapped;
@@ -302,6 +290,7 @@ in {
           papercolor-theme
           plenary-nvim
           popup-nvim
+          project-nvim
           nvim-cmp
           cmp-nvim-lsp
           telescope-file-browser-nvim

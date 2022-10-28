@@ -81,7 +81,7 @@ nnoremap <Leader>fb :Telescope file_browser<CR>
 nnoremap <leader>fw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
 nnoremap <leader>bf :lua require('telescope.builtin').buffers()<CR>
 nnoremap <leader>nix :lua require('nikolaishields.telescope').search_nixos_config()<CR>
+nnoremap <leader>src :lua require('nikolaishields.telescope').search_src()<CR>
 
 " Undotree
-lua require("nikolaishields")
 nnoremap <leader>pu :UndotreeToggle<CR>

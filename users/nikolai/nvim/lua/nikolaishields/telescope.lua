@@ -40,8 +40,16 @@ require("telescope").setup({
 
 require("telescope").load_extension("fzy_native")
 require("telescope").load_extension("file_browser")
+require("telescope").load_extension("projects")
 
 local M = {}
+M.search_src = function()
+    require("telescope.builtin").find_files({
+        prompt_title = "< Projects >",
+        cwd = "$HOME/src/github.com",
+        hidden = false,
+    })
+end
 
 M.search_nixos_config = function()
     require("telescope.builtin").find_files({
