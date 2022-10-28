@@ -92,14 +92,11 @@ in {
       jq
       k9s
       kanshi
-      kitty
       kubectl
       light
       logseq
       nerdfonts
-      nixos-generators
       obs-studio-plugins.wlrobs
-      openconnect
       pass
       pinentry
       ranger
@@ -112,7 +109,6 @@ in {
       tealdeer
       thunderbird
       tmux
-      vagrant
       virt-manager
       whois
       wl-clipboard

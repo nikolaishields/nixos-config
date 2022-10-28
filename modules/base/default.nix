@@ -27,10 +27,8 @@
     fwupd
     lshw
     htop
-    pass
     ripgrep
     usbutils
-    vault
     vim
     wget
     zfs

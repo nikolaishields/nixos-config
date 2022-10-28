@@ -50,7 +50,6 @@ in
     eidolon
     firefox
     fprintd
-    google-chrome
     gparted
     greetd.greetd
     gsettings-desktop-schemas
@@ -58,13 +57,11 @@ in
     gtk_engines
     opensc
     inkscape
-    keybase-gui
     libfprint
     libreoffice
     lxappearance
     mpv
     obs-studio
-    paperkey
     pavucontrol
     pinentry-qt
     polkit_gnome
