@@ -59,6 +59,13 @@ in {
     };
 
     home.file = {
+      ".tmux.conf" = {
+      source = ./tmux.conf;
+      recursive = true;
+      };
+    };
+
+    home.file = {
       ".local/bin/git-snapshot" = {
       source = ./scripts/git-snapshot;
       };
@@ -91,6 +98,7 @@ in {
       htop
       jq
       k9s
+      kitty
       kanshi
       kubectl
       light
