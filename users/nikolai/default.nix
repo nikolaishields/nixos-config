@@ -154,7 +154,7 @@ in {
           docked = {
             outputs = [
               { 
-                criteria = "Goldstar Company Ltd LG HDR WQHD"; 
+                criteria = "DP-8"; 
                 status = "enable";
               }
               {
@@ -302,6 +302,7 @@ in {
           telescope-nvim
           undotree
           vim-fugitive
+          vim-nix
         ];
       };
 

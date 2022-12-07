@@ -8,7 +8,7 @@ let
   up    = "k";
   resizeAmount = "30px";
   filebrowser = "nemo";
-  webbrowser = "chrome";
+  webbrowser = "firefox";
   webbrowserPersistent = "firefox";
   musicplayer = "spotify";
 in
@@ -160,9 +160,6 @@ in
           }
           {
             command = "tilix";
-          }
-          {
-            command = "logseq";
           }
           {
             command = "thunderbird";
