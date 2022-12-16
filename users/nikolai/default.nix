@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz";
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-22.11.tar.gz";
 in {
   security = {
     sudo.wheelNeedsPassword = false;
@@ -23,7 +23,7 @@ in {
     (import "${home-manager}/nixos")
   ];
 
-  home-manager.useGlobalPkgs = true;
+  home-manager.useGlobalPkgs = false;
 
   home-manager.users.nikolai = {
     home.username = "nikolai";
@@ -151,10 +151,24 @@ in {
         enable = true;
         package = pkgs.unstable.kanshi;
         profiles = {
-          docked = {
+          docked2 = {
             outputs = [
               { 
                 criteria = "DP-8"; 
+                status = "enable";
+              }
+              {
+                criteria = "eDP-1";
+                status = "disable";
+                scale = 1.00;
+              }
+
+            ];
+          };
+          docked = {
+            outputs = [
+              { 
+                criteria = "DP-7"; 
                 status = "enable";
               }
               {
@@ -265,6 +279,8 @@ in {
           dl = "$HOME/down";
         };
 
+        initExtra = builtins.readFile zsh/git-bug; 
+
       };
 
       neovim = {
@@ -285,8 +301,10 @@ in {
         extraConfig = builtins.readFile nvim/vimrc;
 
         plugins = with pkgs.vimPlugins; [
+          vimwiki
           luasnip
           auto-pairs
+          auto-save-nvim
           neoformat
           neomake
           nerdcommenter
