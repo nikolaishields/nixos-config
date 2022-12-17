@@ -170,6 +170,9 @@ in
           {
             command = "configure-gtk";
           }
+          {
+            command = "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP";
+          }
         ];
   
         terminal = "tilix";

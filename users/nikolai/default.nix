@@ -23,7 +23,7 @@ in {
     (import "${home-manager}/nixos")
   ];
 
-  home-manager.useGlobalPkgs = false;
+  home-manager.useGlobalPkgs = true;
 
   home-manager.users.nikolai = {
     home.username = "nikolai";

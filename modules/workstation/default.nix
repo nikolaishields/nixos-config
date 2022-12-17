@@ -40,7 +40,7 @@ let
 
 in
 {
-  environment.systemPackages = with pkgs.unstable; [
+  environment.systemPackages = with pkgs; [
     age
     age-plugin-yubikey
     blueberry
@@ -93,7 +93,6 @@ in
     wlr.enable = true;
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
-    gtkUsePortal = true;
   };
 
   services = {
