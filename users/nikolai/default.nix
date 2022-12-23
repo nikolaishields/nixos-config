@@ -321,6 +321,7 @@ in {
           undotree
           vim-fugitive
           vim-nix
+          telescope-project-nvim
         ];
       };
 
