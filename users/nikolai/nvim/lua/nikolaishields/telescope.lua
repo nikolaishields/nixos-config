@@ -34,13 +34,21 @@ require("telescope").setup({
         file_browser = {
             theme = "ivy",
         
+        },
+        project = {
+            base_dirs = {
+                '/home/nikolai/src/github.com/nikolaishields',
+                '/home/nikolai/src/github.com/rancher/src'
+            },
+            hidden_files = true,
+            theme = "dropdown",
         }
     },
 })
 
 require("telescope").load_extension("fzy_native")
 require("telescope").load_extension("file_browser")
-require("telescope").load_extension("projects")
+require("telescope").load_extension("project")
 
 local M = {}
 M.search_src = function()
@@ -59,3 +67,5 @@ M.search_nixos_config = function()
     })
 end
 return M
+
+

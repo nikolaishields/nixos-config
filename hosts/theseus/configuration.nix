@@ -48,9 +48,8 @@ in {
   nixpkgs = {
     config = {
       allowUnfree = true;
-      autoOptimiseStore = true;
       packageOverrides = pkgs: rec{
-        unstable = import unstableTarball { config = config.nixpkgs.config; };
+      unstable = import unstableTarball { config = config.nixpkgs.config; };
       };
     };
   };
