@@ -59,13 +59,6 @@ in {
     };
 
     home.file = {
-      ".tmux.conf" = {
-      source = ./tmux.conf;
-      recursive = true;
-      };
-    };
-
-    home.file = {
       ".local/bin/git-snapshot" = {
       source = ./scripts/git-snapshot;
       };
@@ -116,7 +109,6 @@ in {
       sysz
       tealdeer
       thunderbird
-      tmux
       virt-manager
       whois
       wl-clipboard
@@ -281,6 +273,16 @@ in {
 
         initExtra = builtins.readFile zsh/git-bug; 
 
+      };
+
+      tmux = {
+        enable = true;
+        keyMode = "vi";
+        newSession = true;
+        plugins = with pkgs.tmuxPlugins; [
+          tmux-fzf
+        ];
+        extraConfig = builtins.readFile ./tmux.conf; 
       };
 
       neovim = {
