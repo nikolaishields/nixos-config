@@ -162,9 +162,6 @@ in
             command = "tilix";
           }
           {
-            command = "thunderbird";
-          }
-          {
             command = "dbus-sway-environment";
           }
           {
