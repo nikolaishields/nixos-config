@@ -1,0 +1,88 @@
+filetype plugin indent on   " allow auto-indenting depending on file type
+filetype plugin on
+syntax on                   " syntax highlighting
+set autoindent              " indent a new line the same amount as the line just typed
+set wrap
+set encoding=UTF-8
+set cmdheight=1             " Give more space for displaying messages.
+set colorcolumn=80
+set cursorline              " highlight current cursorline
+set expandtab
+set guicursor=
+set hidden
+set hlsearch                " highlight search 
+set ignorecase              " case insensitive 
+set incsearch
+set incsearch               " incremental search
+set isfname+=@-@
+set mouse=a                 " enable mouse click
+set mouse=v                 " middle-click paste with 
+set nobackup
+set nocompatible            " disable compatibility to old-time vi
+set noerrorbells
+set noswapfile
+set nowrap
+set nu
+set scrolloff=8
+set shiftwidth=4
+set shortmess+=c            " Don't pass messages to |ins-completion-menu|.
+set showmatch               " show matching 
+set signcolumn=yes
+set smartindent
+set tabstop=4 
+set softtabstop=4
+set termguicolors
+set ttyfast                 " Speed up scrolling in Vim
+set undodir=~/.vim/undodir
+set undofile
+set updatetime=50
+set wildmode=longest,list   " get bash-like tab completions
+set grepprg=rg\ --vimgrep\ --smart-case\ --follow
+
+" Colors
+set termguicolors
+set background=dark
+colorscheme PaperColor
+
+" Navigation
+let mapleader = " "
+
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+   
+" Quicker quits
+nnoremap <C-q> <C-w>q
+
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+
+" Quick directory change
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+
+nnoremap <leader>wq :w<CR>:bd<CR>
+
+" Run commands that require an interactive shell
+nnoremap <Leader>r :terminal <Space>
+
+" Switch between the last two files
+nnoremap <Leader><Leader> <C-^>
+
+" Git
+nnoremap <leader>git :Git<CR>
+
+" Telescope
+lua require("nikolaishields")
+nnoremap <leader>fs :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
+nnoremap <C-f> :lua require('telescope.builtin').git_files()<CR>
+nnoremap <Leader>ff :lua require('telescope.builtin').find_files()<CR>
+nnoremap <Leader>fb :Telescope file_browser<CR>
+nnoremap <leader>fw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
+nnoremap <leader>bf :lua require('telescope.builtin').buffers()<CR>
+nnoremap <leader>nix :lua require('nikolaishields.telescope').search_nixos_config()<CR>
+nnoremap <leader>src :lua require('nikolaishields.telescope').search_src()<CR>
+
+" Undotree
+nnoremap <leader>pu :UndotreeToggle<CR>
